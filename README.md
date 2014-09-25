@@ -16,5 +16,7 @@ Mobile Safari on iPhone displays `<video>` elements only in fullscreen. This sev
 ### App Store
 Bowser is not only Open Source, but also available as a free download for both iPhone and iPad on the [Apple App Store](https://itunes.apple.com/us/app/bowser/id560478358?mt=8). Bowser is maitained by the community here on GitHub and is administered on the App Store by Ericsson Research. 
 
+<a href="https://itunes.apple.com/us/app/bowser/id560478358?mt=8"><img src="http://static.squarespace.com/static/53f1eedee4b0439bf8d480c5/t/53f24ac3e4b0965e338a090e/1408387813467/?format=300w" /></a>
+
 ### Background
 Bowser was originally developed by Ericsson Research and released in October of 2012, for both iOS and Android devices. Back then Bowser was the world's first WebRTC-enabled browser for mobile devices. Bowser was later removed from the Apple App Store and Google Play but was resurrected and released as Open Source together with OpenWebRTC.
