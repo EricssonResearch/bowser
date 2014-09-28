@@ -1,7 +1,7 @@
 Bowser
 ======
 
-A WebRTC browser for iOS developed in the open.
+A WebRTC browser for iOS developed in the open. Bowser uses [OpenWebRTC](https://github.com/EricssonResearch/openwebrtc).
 
 ![Bowser logo](http://static.squarespace.com/static/53f1eedee4b0439bf8d480c5/t/53f25022e4b0cca46a383183/1408389154850/?format=500w "Bowser logo")
 
