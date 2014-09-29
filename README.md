@@ -10,7 +10,7 @@ Bowser is based on the official `UIWebView` provided by the platform and the [We
 
 The [plan](https://github.com/EricssonResearch/bowser/issues/1) is to move to the `WKWebView`, introduced in iOS 8, as soon as possible.  
 
-## Video
+## Video rendering
 Mobile Safari on iPhone displays `<video>` elements only in fullscreen. This severely limits the UI of your apps, especially when designing video communication apps using WebRTC. Bowser goes beyond that and allows you to fully customise and manipulate `<video>` elements using CSS and JavaScript.
 
 ## Background
