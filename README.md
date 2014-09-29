@@ -17,4 +17,4 @@ Mobile Safari on iPhone displays `<video>` elements only in fullscreen. This sev
 Bowser was originally developed by Ericsson Research and released in October of 2012, for both iOS and Android devices. Back then Bowser was the world's first WebRTC-enabled browser for mobile devices. Bowser was later removed from the Apple App Store and Google Play but was resurrected and released as Open Source together with OpenWebRTC.
 
 ## License
-OpenWebRTC is released under BSD-2 clause. See LICENSE for details.
+Bowser is released under BSD-2 clause. See LICENSE for details.
