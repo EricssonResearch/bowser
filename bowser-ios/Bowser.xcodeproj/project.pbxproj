@@ -87,8 +87,6 @@
 		744223B319D9A75100852460 /* libgstinter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222B919D9A75000852460 /* libgstinter.a */; };
 		744223B419D9A75100852460 /* libgstinterlace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BA19D9A75000852460 /* libgstinterlace.a */; };
 		744223B519D9A75100852460 /* libgstinterleave.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BB19D9A75000852460 /* libgstinterleave.a */; };
-		744223B619D9A75100852460 /* libgstiosaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BC19D9A75000852460 /* libgstiosaudio.a */; };
-		744223B719D9A75100852460 /* libgstiosvideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BD19D9A75000852460 /* libgstiosvideo.a */; };
 		744223B819D9A75100852460 /* libgstisomp4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BE19D9A75000852460 /* libgstisomp4.a */; };
 		744223B919D9A75100852460 /* libgstivfparse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222BF19D9A75000852460 /* libgstivfparse.a */; };
 		744223BA19D9A75100852460 /* libgstivtc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222C019D9A75000852460 /* libgstivtc.a */; };
@@ -1782,7 +1780,6 @@
 				744223ED19D9A75100852460 /* libgstvideofiltersbad.a in Frameworks */,
 				744223A119D9A75100852460 /* libgstencodebin.a in Frameworks */,
 				7442240A19D9A75100852460 /* libgstallocators-1.0.a in Frameworks */,
-				744223B719D9A75100852460 /* libgstiosvideo.a in Frameworks */,
 				744223B019D9A75100852460 /* libgstid3demux.a in Frameworks */,
 				7442239519D9A75100852460 /* libgstcoreelements.a in Frameworks */,
 				744223FF19D9A75100852460 /* libffi.a in Frameworks */,
@@ -1818,7 +1815,6 @@
 				7442241119D9A75100852460 /* libgstcheck-1.0.a in Frameworks */,
 				744223B519D9A75100852460 /* libgstinterleave.a in Frameworks */,
 				7442239419D9A75100852460 /* libgstcompositor.a in Frameworks */,
-				744223B619D9A75100852460 /* libgstiosaudio.a in Frameworks */,
 				7442243019D9A75200852460 /* libopus.a in Frameworks */,
 				B7E3D0DA15625681003DE0F1 /* CoreGraphics.framework in Frameworks */,
 				744223BA19D9A75100852460 /* libgstivtc.a in Frameworks */,
