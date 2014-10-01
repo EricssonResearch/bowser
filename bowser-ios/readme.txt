@@ -1,0 +1,1 @@
+This folder includes files and folders specific for iOS Bowser functionality.
