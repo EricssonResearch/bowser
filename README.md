@@ -13,6 +13,14 @@ The [plan](https://github.com/EricssonResearch/bowser/issues/1) is to move to th
 ## Video rendering
 Mobile Safari on iPhone displays `<video>` elements only in fullscreen. This severely limits the UI of your apps, especially when designing video communication apps using WebRTC. Bowser goes beyond that and allows you to fully customise and manipulate `<video>` elements using CSS and JavaScript.
 
+## Building
+To build Bowser you need a completed build of [OpenWebRTC](https://github.com/EricssonResearch/openwebrtc), Xcode and the iOS SDK. The build itself is pretty simple as we have set up the header/library search paths to expect that you cloned Bowser alongside OpenWebRTC. As long as you have:
+```
+/path/to/bowser
+/path/to/openwebrtc
+```
+...then you shouldn't have any problems with just opening the Xcode project and building.
+
 ## Background
 Bowser was originally developed by Ericsson Research and released in October of 2012, for both iOS and Android devices. Back then Bowser was the world's first WebRTC-enabled browser for mobile devices. Bowser was later removed from the Apple App Store and Google Play but was resurrected and released as Open Source together with OpenWebRTC.
 
