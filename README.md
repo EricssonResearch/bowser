@@ -21,6 +21,9 @@ To build Bowser you need a completed build of [OpenWebRTC](https://github.com/Er
 ```
 ...then you shouldn't have any problems with just opening the Xcode project and building.
 
+## Debugging WebRTC scripts
+As Bowser is using the official `UIWebView` that is provided by the iOS platform you can use [Apple's Web Developer Tools](https://developer.apple.com/safari/tools/) to debug your WebRTC scripts.
+
 ## Background
 Bowser was originally developed by Ericsson Research and released in October of 2012, for both iOS and Android devices. Back then Bowser was the world's first WebRTC-enabled browser for mobile devices. Bowser was later removed from the Apple App Store and Google Play but was resurrected and released as Open Source together with OpenWebRTC.
 
