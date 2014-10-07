@@ -61,7 +61,6 @@
 		7442239919D9A75100852460 /* libgstdebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7442229F19D9A75000852460 /* libgstdebug.a */; };
 		7442239A19D9A75100852460 /* libgstdebugutilsbad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A019D9A75000852460 /* libgstdebugutilsbad.a */; };
 		7442239B19D9A75100852460 /* libgstdeinterlace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A119D9A75000852460 /* libgstdeinterlace.a */; };
-		7442239C19D9A75100852460 /* libgstdtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A219D9A75000852460 /* libgstdtls.a */; };
 		7442239D19D9A75100852460 /* libgstdtmf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A319D9A75000852460 /* libgstdtmf.a */; };
 		7442239E19D9A75100852460 /* libgstdvbsuboverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A419D9A75000852460 /* libgstdvbsuboverlay.a */; };
 		7442239F19D9A75100852460 /* libgstdvdspu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744222A519D9A75000852460 /* libgstdvdspu.a */; };
@@ -1634,7 +1633,6 @@
 				744223A519D9A75100852460 /* libgstfestival.a in Frameworks */,
 				744223C119D9A75100852460 /* libgstmpegpsdemux.a in Frameworks */,
 				744223C519D9A75100852460 /* libgstmultipart.a in Frameworks */,
-				7442239C19D9A75100852460 /* libgstdtls.a in Frameworks */,
 				744223E519D9A75100852460 /* libgstsubparse.a in Frameworks */,
 				744223EA19D9A75100852460 /* libgstvideoconvert.a in Frameworks */,
 				744223D119D9A75100852460 /* libgstrawparse.a in Frameworks */,
