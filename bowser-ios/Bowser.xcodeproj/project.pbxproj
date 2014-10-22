@@ -4188,6 +4188,10 @@
 					"$(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/lib/**",
 					"$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/lib/**",
 				);
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					VideoToolbox,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -4217,6 +4221,10 @@
 					"$(SRCROOT)",
 					"$(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/lib/**",
 					"$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/lib/**",
+				);
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					VideoToolbox,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
