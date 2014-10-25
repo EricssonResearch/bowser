@@ -4001,11 +4001,6 @@
 				CLASSPREFIX = Bowser;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Ericsson Research";
-				TargetAttributes = {
-					B7E3D0D015625681003DE0F1 = {
-						DevelopmentTeam = 53ECQCJXJ4;
-					};
-				};
 			};
 			buildConfigurationList = B7E3D0CB15625681003DE0F1 /* Build configuration list for PBXProject "Bowser" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -4195,6 +4190,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/include/** $(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/include/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -4229,6 +4225,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/include/** $(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/include/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
