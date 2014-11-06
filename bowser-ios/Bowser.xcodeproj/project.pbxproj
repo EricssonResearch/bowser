@@ -235,6 +235,9 @@
 		B7F52B31157612E4001330BD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F52B2E157612E4001330BD /* AVFoundation.framework */; };
 		B7F52B32157612E4001330BD /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F52B2F157612E4001330BD /* CoreAudio.framework */; };
 		B7F52B3415761324001330BD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F52B3315761324001330BD /* AudioToolbox.framework */; };
+		F81B2E001A0BC7580053E19A /* Bookmarks.plist in Resources */ = {isa = PBXBuildFile; fileRef = F81B2DFF1A0BC7580053E19A /* Bookmarks.plist */; };
+		F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F81B2E021A0BD8390053E19A /* BookmarksViewController.m */; };
+		F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F81B2E061A0BFB8A0053E19A /* AddBookmarkViewController.m */; };
 		F84D76DD19A368C20039552D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84D76DC19A368C20039552D /* Images.xcassets */; };
 		F89E07B615F8CB5B00262F59 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A82AEC15F8C00E003460E5 /* AboutViewController.m */; };
 		F8AE2FC219D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */; };
@@ -1610,6 +1613,12 @@
 		B7F52B2E157612E4001330BD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B7F52B2F157612E4001330BD /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		B7F52B3315761324001330BD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F81B2DFC1A0BC1060053E19A /* Bowser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bowser-Bridging-Header.h"; sourceTree = "<group>"; };
+		F81B2DFF1A0BC7580053E19A /* Bookmarks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bookmarks.plist; sourceTree = "<group>"; };
+		F81B2E011A0BD8390053E19A /* BookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksViewController.h; sourceTree = "<group>"; };
+		F81B2E021A0BD8390053E19A /* BookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksViewController.m; sourceTree = "<group>"; };
+		F81B2E051A0BFB8A0053E19A /* AddBookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBookmarkViewController.h; sourceTree = "<group>"; };
+		F81B2E061A0BFB8A0053E19A /* AddBookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookmarkViewController.m; sourceTree = "<group>"; };
 		F84D76DC19A368C20039552D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		F8A82AEB15F8C00E003460E5 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ../AboutViewController.h; sourceTree = "<group>"; };
 		F8A82AEC15F8C00E003460E5 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = ../AboutViewController.m; sourceTree = "<group>"; };
@@ -3917,6 +3926,7 @@
 		B7E3D0DB15625681003DE0F1 /* Bowser */ = {
 			isa = PBXGroup;
 			children = (
+				F81B2E041A0BFB600053E19A /* Bookmarks */,
 				B7E3D0E415625681003DE0F1 /* BowserAppDelegate.h */,
 				B7E3D0E515625681003DE0F1 /* BowserAppDelegate.m */,
 				B7E3D0E715625681003DE0F1 /* MainStoryboard_iPhone.storyboard */,
@@ -3952,6 +3962,8 @@
 				B7E3D0DE15625681003DE0F1 /* InfoPlist.strings */,
 				B7E3D0E115625681003DE0F1 /* main.m */,
 				B7E3D0E315625681003DE0F1 /* Bowser-Prefix.pch */,
+				F81B2DFC1A0BC1060053E19A /* Bowser-Bridging-Header.h */,
+				F81B2DFF1A0BC7580053E19A /* Bookmarks.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3970,6 +3982,17 @@
 			children = (
 			);
 			name = tests;
+			sourceTree = "<group>";
+		};
+		F81B2E041A0BFB600053E19A /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				F81B2E011A0BD8390053E19A /* BookmarksViewController.h */,
+				F81B2E021A0BD8390053E19A /* BookmarksViewController.m */,
+				F81B2E051A0BFB8A0053E19A /* AddBookmarkViewController.h */,
+				F81B2E061A0BFB8A0053E19A /* AddBookmarkViewController.m */,
+			);
+			name = Bookmarks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4024,6 +4047,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F81B2E001A0BC7580053E19A /* Bookmarks.plist in Resources */,
 				B7E3D0E015625681003DE0F1 /* InfoPlist.strings in Resources */,
 				B7E3D0E915625681003DE0F1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				74421E0C19D9A73700852460 /* openwebrtc-0.1.pc in Resources */,
@@ -4053,7 +4077,9 @@
 				6CE852B51593503F00404367 /* BowserWebView.m in Sources */,
 				6C77B9CC1599D93F00AFECC2 /* BowserFavicon.m in Sources */,
 				6C77B9D71599E1D700AFECC2 /* BowserHistoryTableViewCell.m in Sources */,
+				F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */,
 				6C733904163ED77B001908E5 /* BowserConfirmView.m in Sources */,
+				F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */,
 				6CEFE68E164954010030C290 /* BowserMediaAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4167,6 +4193,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4177,6 +4204,7 @@
 				);
 				INFOPLIST_FILE = "Bowser/Bowser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -4191,6 +4219,8 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bowser/Bowser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/include/** $(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/include/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -4202,6 +4232,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4212,6 +4243,7 @@
 				);
 				INFOPLIST_FILE = "Bowser/Bowser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -4226,6 +4258,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bowser/Bowser-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/include/** $(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/include/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Bowser View Controller-->
@@ -270,11 +270,13 @@
                         <outlet property="historyTableView" destination="GRY-3v-31k" id="pe0-S8-Qrk"/>
                         <outlet property="progressBar" destination="Mxv-29-3Gj" id="LaL-KW-XDx"/>
                         <outlet property="urlField" destination="e1U-Sq-AHd" id="P8w-d1-tg0"/>
+                        <segue destination="7Ma-1Q-Io1" kind="modal" identifier="bookmarksSegue" id="WtD-D7-nJo"/>
+                        <segue destination="zsV-Qm-pfN" kind="modal" identifier="addBookmarkSegue" id="ULX-mm-vZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="390"/>
+            <point key="canvasLocation" x="415" y="-340"/>
         </scene>
         <!--About-->
         <scene sceneID="iMR-Sx-Xfs">
@@ -312,6 +314,100 @@
             </objects>
             <point key="canvasLocation" x="1508" y="390"/>
         </scene>
+        <!--Bookmark-->
+        <scene sceneID="sbP-Da-eWV">
+            <objects>
+                <viewController id="Dhu-jn-KYF" customClass="AddBookmarkViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1dP-yA-NH5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" clearButtonMode="always" id="TbQ-Ph-c4J">
+                                <rect key="frame" x="16" y="27" width="382" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" minimumFontSize="17" clearButtonMode="always" id="ycm-5A-znh">
+                                <rect key="frame" x="16" y="79" width="382" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bookmark" id="oTm-K6-DBn">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8ds-be-RDb">
+                            <color key="tintColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="Dhu-jn-KYF" id="MhN-Dh-4O8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="5Mh-la-ld2">
+                            <color key="tintColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="Dhu-jn-KYF" id="09S-IE-NbR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="titleTextField" destination="TbQ-Ph-c4J" id="mKf-Q4-UFc"/>
+                        <outlet property="urlTextField" destination="ycm-5A-znh" id="wqF-re-pub"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O2t-RF-jpX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1508" y="-785"/>
+        </scene>
+        <!--Bookmarks-->
+        <scene sceneID="gaO-rW-3Jn">
+            <objects>
+                <tableViewController id="6qX-TV-wof" customClass="BookmarksViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ju4-Qu-xMP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookmarkCell" textLabel="L2w-zM-862" detailTextLabel="ACI-kM-kCX" style="IBUITableViewCellStyleSubtitle" id="WsW-p7-gG0">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WsW-p7-gG0" id="3rH-wK-BUm">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L2w-zM-862">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ACI-kM-kCX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6qX-TV-wof" id="zNz-y9-EF2"/>
+                            <outlet property="delegate" destination="6qX-TV-wof" id="B4W-l5-o5b"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="zXE-P0-hg0">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="5Vp-xK-gBz">
+                            <color key="tintColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="6qX-TV-wof" id="p4p-fw-OxS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vT9-2v-ZVW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1508" y="-220"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ta3-N8-jtd">
             <objects>
@@ -331,6 +427,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1cs-kK-k8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1075" y="390"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8WH-Xe-M1V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Ma-1Q-Io1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="YCs-9Z-s5K">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6qX-TV-wof" kind="relationship" relationship="rootViewController" id="x31-a3-qyK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gg0-Gy-qF8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1075" y="-220"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8uM-HA-AiI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zsV-Qm-pfN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cQr-Zz-izO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Kfn-4A-ZpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dhu-jn-KYF" kind="relationship" relationship="rootViewController" id="afQ-zK-PLl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FP5-Ra-TV9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1075" y="-785"/>
         </scene>
     </scenes>
     <resources>
