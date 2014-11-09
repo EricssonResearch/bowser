@@ -32,14 +32,18 @@
 #import "AboutViewController.h"
 #import "BowserConfirmView.h"
 #import "BowserMediaAlertView.h"
+#import "BookmarksViewController.h"
+#import "AddBookmarkViewController.h"
 
 typedef enum {
     BowserMenuOptionClearHistory,
     BowserMenuOptionShowConsole,
     BowserMenuOptionAboutPage,
+    BowserMenuOptionShowBookmarks,
+    BowserMenuOptionAddBookmark,
 } BowserMenuOption;
 
-@interface BowserViewController : UIViewController <UIWebViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, BowserWebViewDelegate, /*BowserConfirmViewDelegate,*/ UIAlertViewDelegate>
+@interface BowserViewController : UIViewController <UIWebViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, BowserWebViewDelegate, BookmarkSelectionDelegate, UIAlertViewDelegate>
 {
     bool canChange;
     bool headerIsAbove;
@@ -48,7 +52,7 @@ typedef enum {
     NSMutableArray *bowserHistory;
     NSArray *filteredHistory;
     NSTimer *pageNavigationTimer;
-    __strong NSString *historyFilePath;
+    __strong NSString *historyFilePath, *bookmarksFilePath;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *historyTableView;

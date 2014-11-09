@@ -86,18 +86,24 @@ static UIImageView *remoteView;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     historyFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserHistory.plist"];
+    bookmarksFilePath = [documentsDirectory stringByAppendingPathComponent:@"Bookmarks.plist"];
     self.mediaPermissionsURLsFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserMediaPermissionURLs.plist"];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if (![fileManager fileExistsAtPath: historyFilePath]) {
+    if (![fileManager fileExistsAtPath:historyFilePath]) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BowserHistory" ofType:@"plist"];
-        [fileManager copyItemAtPath:filePath toPath: historyFilePath error:&error];
+        [fileManager copyItemAtPath:filePath toPath:historyFilePath error:&error];
     }
-    if (![fileManager fileExistsAtPath: self.mediaPermissionsURLsFilePath]) {
+    if (![fileManager fileExistsAtPath:bookmarksFilePath]) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Bookmarks" ofType:@"plist"];
+        [fileManager copyItemAtPath:filePath toPath:bookmarksFilePath error:&error];
+    }
+    if (![fileManager fileExistsAtPath:self.mediaPermissionsURLsFilePath]) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BowserMediaPermissionURLs" ofType:@"plist"];
-        [fileManager copyItemAtPath:filePath toPath: self.mediaPermissionsURLsFilePath error:&error];
+        [fileManager copyItemAtPath:filePath toPath:self.mediaPermissionsURLsFilePath error:&error];
     }
+
     self.mediaPermissionURLs = [[NSMutableDictionary alloc] initWithContentsOfFile:self.mediaPermissionsURLsFilePath];
     bowserHistory = [[NSMutableArray alloc] initWithContentsOfFile:historyFilePath];
     [self.confirmView setUpView];
@@ -158,7 +164,9 @@ static UIImageView *remoteView;
                                                     otherButtonTitles:
                                   @"Clear History",
                                   consoleIsVisible? @"Hide Console": @"Show Console",
-                                  @"About Bowser", nil];
+                                  @"About Bowser",
+                                  @"Bookmarks",
+                                  @"Add bookmark", nil];
     [actionSheet showInView:self.view];
 }
 
@@ -178,6 +186,14 @@ static UIImageView *remoteView;
     } else if (buttonIndex == BowserMenuOptionAboutPage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"aboutPageSegue" sender:self];
+        });
+    } else if (buttonIndex == BowserMenuOptionShowBookmarks) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"bookmarksSegue" sender:self];
+        });
+    } else if (buttonIndex == BowserMenuOptionAddBookmark) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"addBookmarkSegue" sender:self];
         });
     }
 }
@@ -567,6 +583,25 @@ static UIImageView *remoteView;
     [bowserHistory writeToFile:historyFilePath atomically:YES];
     [self.mediaPermissionURLs writeToFile:self.mediaPermissionsURLsFilePath atomically:YES];
     NSLog(@"writing files!");
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"bookmarksSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        BookmarksViewController *bvc = [navController viewControllers][0];
+        bvc.selectionDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"addBookmarkSegue"]) {
+        UINavigationController *navController = segue.destinationViewController;
+        AddBookmarkViewController *abvc = [navController viewControllers][0];
+        abvc.bookmarkTitle = [self.browserView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        abvc.bookmarkURL = [self.browserView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    }
+}
+
+- (void)bookmarkSelectedWithURL:(NSString *)URL
+{
+    [self loadRequestWithURL:URL];
 }
 
 @end
