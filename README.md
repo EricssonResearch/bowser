@@ -10,6 +10,8 @@ Bowser is not only Open Source, it is also available as a [free download](https:
 
 <a href="https://itunes.apple.com/app/bowser/id560478358?mt=8"><img src="http://static.squarespace.com/static/53f1eedee4b0439bf8d480c5/t/545343aee4b0c4d5c0fdb7be/1414742958599/Download_on_the_App_Store_Badge_US-UK_135x40_0801.png?format=300w"></a>
 
+[![Bowser video](http://img.youtube.com/vi/mR_-2trCjzE/0.jpg)](http://www.youtube.com/watch?v=mR_-2trCjzE)
+
 ## Developing for Bowser
 Tips and other resources can be found on the wiki page [Developing for Bowser](https://github.com/EricssonResearch/bowser/wiki/Developing-for-Bowser).
 
