@@ -29,6 +29,7 @@
 
 #import "BowserViewController.h"
 #import "BowserHistoryTableViewCell.h"
+#include <owr_bridge.h>
 
 static NSString *const kGetUserMedia = @"getUserMedia";
 static NSString *const kGetIpAndPort = @"qd_v1_getLocal";
@@ -126,16 +127,40 @@ static UIImageView *remoteView;
     [self.browserView.scrollView addSubview:selfView];
     [self.headerView addSubview:self.bookmarkButton];
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    static BOOL isBridgeInitialized = NO;
+    if (isBridgeInitialized)
+        return;
 
     NSString *startURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastURL"];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"has_started"] || !startURL) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"has_started"];
         startURL = kDefaultStartURL;
     }
-    self.urlField.text = startURL;
 
-    // Let's get started...
-    [self loadRequestWithURL:startURL];
+    dispatch_queue_t queue = dispatch_queue_create("OWR init queue", NULL);
+    dispatch_async(queue, ^{
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Initializing"
+                                                                       message:@"Please wait..."
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
+
+        NSLog(@"OWR bridge starting...");
+        owr_bridge_start_in_thread();
+        NSLog(@"OWR bridge started");
+
+        [alert dismissViewControllerAnimated:YES completion:^{
+            // Let's get started...
+            self.urlField.text = startURL;
+            [self loadRequestWithURL:startURL];
+        }];
+    });
+
+    isBridgeInitialized = YES;
 }
 
 - (void)loadRequestWithURL:(NSString *)url
