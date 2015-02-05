@@ -29,7 +29,6 @@
 
 #import "BowserAppDelegate.h"
 #import "BowserViewController.h"
-#include <owr_bridge.h>
 #import <AVFoundation/AVAudioSession.h>
 
 #define kUserAgent @"Mozilla/5.0 (iOS; like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) not Chrome/36.0.1500.95 Mobile/12B411 Safari/600.1.4 Bowser/%@"
@@ -38,8 +37,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    owr_bridge_start_in_thread();
-
     NSError* theError = nil;
     BOOL result = YES;
 
