@@ -144,16 +144,16 @@ static UIImageView *remoteView;
     dispatch_queue_t queue = dispatch_queue_create("OWR init queue", NULL);
     dispatch_async(queue, ^{
 
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Initializing"
-                                                                       message:@"Please wait..."
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self performSelector:@selector(presentInitializingMessage)
+                     onThread:[NSThread mainThread]
+                   withObject:nil
+                waitUntilDone:NO];
 
         NSLog(@"OWR bridge starting...");
         owr_bridge_start_in_thread();
         NSLog(@"OWR bridge started");
 
-        [alert dismissViewControllerAnimated:YES completion:^{
+        [self dismissViewControllerAnimated:YES completion:^{
             // Let's get started...
             self.urlField.text = startURL;
             [self loadRequestWithURL:startURL];
@@ -161,6 +161,14 @@ static UIImageView *remoteView;
     });
 
     isBridgeInitialized = YES;
+}
+
+- (void)presentInitializingMessage
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Initializing"
+                                                                   message:@"Please wait..."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)loadRequestWithURL:(NSString *)url
