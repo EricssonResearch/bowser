@@ -13,7 +13,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.ericsson.research.mario.appstore.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.ericsson.research.mario.appstore.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -59,6 +59,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.ericsson.research.bowser</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bowsers</string>
+				<string>bowser</string>
+			</array>
+		</dict>
+	</array>
 	<key>User</key>
 	<string>${USER}</string>
 </dict>

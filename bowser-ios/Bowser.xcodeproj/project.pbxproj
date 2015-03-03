@@ -4024,6 +4024,11 @@
 				CLASSPREFIX = Bowser;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Ericsson Research";
+				TargetAttributes = {
+					B7E3D0D015625681003DE0F1 = {
+						DevelopmentTeam = 8J7L2VBRVP;
+					};
+				};
 			};
 			buildConfigurationList = B7E3D0CB15625681003DE0F1 /* Build configuration list for PBXProject "Bowser" */;
 			compatibilityVersion = "Xcode 3.2";

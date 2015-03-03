@@ -32,5 +32,6 @@
 @interface BowserAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign) NSString *launchURL;
 
 @end
