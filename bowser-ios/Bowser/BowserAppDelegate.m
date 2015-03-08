@@ -35,6 +35,10 @@
 
 @implementation BowserAppDelegate
 
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSError* theError = nil;
@@ -64,7 +68,18 @@
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([[url scheme] isEqualToString:@"bowser"]) {
+        self.launchURL = [[url absoluteString] stringByReplacingOccurrencesOfString:@"bowser://" withString:@"http://"];
+    }
+    else if ([[url scheme] isEqualToString:@"bowsers"]) {
+        self.launchURL = [[url absoluteString] stringByReplacingOccurrencesOfString:@"bowsers://" withString:@"https://"];
+    }
+    
+    return YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

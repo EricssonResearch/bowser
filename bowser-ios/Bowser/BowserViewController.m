@@ -30,6 +30,7 @@
 #import "BowserViewController.h"
 #import "BowserHistoryTableViewCell.h"
 #include <owr_bridge.h>
+#import "BowserAppDelegate.h"
 
 static NSString *const kGetUserMedia = @"getUserMedia";
 static NSString *const kGetIpAndPort = @"qd_v1_getLocal";
@@ -63,6 +64,8 @@ static UIImageView *remoteView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"BowserViewController viewDidLoad");
 
     self.javascriptCode = @
         "(function () {"
@@ -135,7 +138,12 @@ static UIImageView *remoteView;
     if (isBridgeInitialized)
         return;
 
+    BowserAppDelegate *bowserAppDelegate = (BowserAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [bowserAppDelegate addObserver:self forKeyPath:@"launchURL" options:NSKeyValueObservingOptionNew context:nil];
+    
     NSString *startURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastURL"];
+
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"has_started"] || !startURL) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"has_started"];
         startURL = kDefaultStartURL;
@@ -169,6 +177,19 @@ static UIImageView *remoteView;
                                                                    message:@"Please wait..."
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"launchURL"]){
+        NSString *startURL = change[@"new"];
+        
+        if(![startURL isEqual:nil] && ![startURL isEqualToString:@""]){
+            self.urlField.text = startURL;
+            
+            [self loadRequestWithURL:startURL];
+        }
+    }
 }
 
 - (void)loadRequestWithURL:(NSString *)url
