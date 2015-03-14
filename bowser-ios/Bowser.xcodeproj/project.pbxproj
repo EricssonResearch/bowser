@@ -312,6 +312,7 @@
 				6CE852B51593503F00404367 /* BowserWebView.m in Sources */,
 				6C77B9CC1599D93F00AFECC2 /* BowserFavicon.m in Sources */,
 				6C77B9D71599E1D700AFECC2 /* BowserHistoryTableViewCell.m in Sources */,
+				4AC2338C1A80305700710CD3 /* BowserImageView.m in Sources */,
 				F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */,
 				6C733904163ED77B001908E5 /* BowserConfirmView.m in Sources */,
 				F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */,
