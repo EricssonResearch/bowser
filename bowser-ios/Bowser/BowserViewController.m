@@ -29,8 +29,10 @@
 
 #import "BowserViewController.h"
 #import "BowserHistoryTableViewCell.h"
-#include <owr_bridge.h>
 #import "BowserAppDelegate.h"
+#import "BowserImageView.h"
+#include <owr_bridge.h>
+#include <owr_window_registry.h>
 
 static NSString *const kGetUserMedia = @"getUserMedia";
 static NSString *const kGetIpAndPort = @"qd_v1_getLocal";
@@ -48,6 +50,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 @interface BowserViewController ()
 
 @property (nonatomic, strong) NSMutableArray *consoleLogArray;
+@property (nonatomic, strong) NSMutableDictionary *renderers;
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError;
 
@@ -60,6 +63,18 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     [super viewDidLoad];
     
     NSLog(@"BowserViewController viewDidLoad");
+
+    self.javascriptCode = @
+        "(function () {"
+        "    if (window.RTCPeerConnection)"
+        "        return \"\";"
+        "    var xhr = new XMLHttpRequest();"
+        "    xhr.open(\"GET\", \"" kBridgeLocalURL "\", false);"
+        "    xhr.send();"
+        "    window.navigator.__owrVideoOverlaySupport = true;"
+        "    eval(xhr.responseText);"
+        "    return \"ok\";"
+        "})()";
 
     self.browserView.scrollView.delegate = self;
     self.browserView.owrDelegate = self;
@@ -100,8 +115,12 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     self.selfView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
     self.remoteView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
 
-    [self.browserView.scrollView addSubview:self.remoteView];
-    [self.browserView.scrollView addSubview:self.selfView];
+    // TODO conflict: Maybe not add them here?
+    //[self.browserView.scrollView addSubview:self.remoteView];
+    //[self.browserView.scrollView addSubview:self.selfView];
+
+    self.renderers = [NSMutableDictionary dictionary];
+
     [self.headerView addSubview:self.bookmarkButton];
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
 
@@ -351,13 +370,28 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 #pragma mark webview delegate stuff
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
+    [self.renderers enumerateKeysAndObjectsUsingBlock:^(NSString *tag, BowserImageView *videoView, BOOL *stop) {
+        owr_window_registry_unregister(owr_window_registry_get(), [tag UTF8String]);
+        [videoView removeFromSuperview];
+    }];
+    [self.renderers removeAllObjects];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.urlField.text = webView.URL.absoluteString;
 
     NSLog(@"webViewDidStartLoading... %@", webView.URL.absoluteString);
     self.progressBar.hidden = NO;
+
     [self newVideoRect:CGRectZero forSelfView:YES];
     [self newVideoRect:CGRectZero forSelfView:NO];
+    if (pageNavigationTimer.isValid)
+        [pageNavigationTimer invalidate];
+
+    NSLog(@"creating timer");
+    pageNavigationTimer = [NSTimer scheduledTimerWithTimeInterval:0
+                                                           target:self
+                                                         selector:@selector(insertJavascript:)
+                                                         userInfo:nil
+                                                          repeats:YES];
 }
 
 /*
@@ -372,13 +406,24 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 }
  */
 
-- (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView
+- (void)newVideoRect:(CGRect)rect rotation:(int)degrees tag:(NSString *)tag
 {
     if (rectIsSelfView) {
         self.selfView.frame = rect;
     } else {
         self.remoteView.frame = rect;
+
+    BowserImageView *videoView = [self.renderers valueForKey:tag];
+
+    if (!videoView) {
+        videoView = [[BowserImageView alloc] initWithFrame:rect];
+        [self.renderers setObject:videoView forKey:tag];
+        [self.browserView.scrollView addSubview:videoView];
+        owr_window_registry_register(owr_window_registry_get(), [tag UTF8String], (__bridge gpointer)videoView);
     }
+
+    videoView.transform = CGAffineTransformMakeRotation(2 * M_PI * degrees / 360);
+    videoView.frame = rect;
 }
 
 - (void)webviewProgress:(float)progress
