@@ -13,6 +13,7 @@
 		6C77B9C11599A7C200AFECC2 /* BowserHistory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C77B9C01599A7C200AFECC2 /* BowserHistory.plist */; };
 		6C77B9CC1599D93F00AFECC2 /* BowserFavicon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */; };
 		6C77B9D71599E1D700AFECC2 /* BowserHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C77B9D61599E1D600AFECC2 /* BowserHistoryTableViewCell.m */; };
+		4AC2338C1A80305700710CD3 /* BowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2338B1A80305700710CD3 /* BowserImageView.m */; };
 		6CB480391642972C00425E13 /* BowserMediaPermissionURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */; };
 		6CE852B51593503F00404367 /* BowserWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE852B41593503F00404367 /* BowserWebView.m */; };
 		6CEFE68E164954010030C290 /* BowserMediaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEFE68D164954010030C290 /* BowserMediaAlertView.m */; };
@@ -43,6 +44,8 @@
 		6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserFavicon.m; sourceTree = "<group>"; };
 		6C77B9D51599E1D600AFECC2 /* BowserHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowserHistoryTableViewCell.h; sourceTree = "<group>"; };
 		6C77B9D61599E1D600AFECC2 /* BowserHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserHistoryTableViewCell.m; sourceTree = "<group>"; };
+		4AC2338B1A80305700710CD3 /* BowserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserImageView.m; sourceTree = "<group>"; };
+		4AC2338D1A80308100710CD3 /* BowserImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BowserImageView.h; sourceTree = "<group>"; };
 		6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BowserMediaPermissionURLs.plist; sourceTree = "<group>"; };
 		6CE852B31593503F00404367 /* BowserWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowserWebView.h; sourceTree = "<group>"; };
 		6CE852B41593503F00404367 /* BowserWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserWebView.m; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				6CE852B31593503F00404367 /* BowserWebView.h */,
 				6CE852B41593503F00404367 /* BowserWebView.m */,
 				6C77B9C01599A7C200AFECC2 /* BowserHistory.plist */,
+				4AC2338B1A80305700710CD3 /* BowserImageView.m */,
+				4AC2338D1A80308100710CD3 /* BowserImageView.h */,
 				6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */,
 				6C77B9CA1599D93F00AFECC2 /* BowserFavicon.h */,
 				6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */,
@@ -319,6 +324,7 @@
 				6CE852B51593503F00404367 /* BowserWebView.m in Sources */,
 				6C77B9CC1599D93F00AFECC2 /* BowserFavicon.m in Sources */,
 				6C77B9D71599E1D700AFECC2 /* BowserHistoryTableViewCell.m in Sources */,
+				4AC2338C1A80305700710CD3 /* BowserImageView.m in Sources */,
 				F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */,
 				6C733904163ED77B001908E5 /* BowserConfirmView.m in Sources */,
 				F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */,

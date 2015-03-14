@@ -29,8 +29,10 @@
 
 #import "BowserViewController.h"
 #import "BowserHistoryTableViewCell.h"
-#include <owr_bridge.h>
 #import "BowserAppDelegate.h"
+#import "BowserImageView.h"
+#include <owr_bridge.h>
+#include <owr_window_registry.h>
 
 static NSString *const kGetUserMedia = @"getUserMedia";
 static NSString *const kGetIpAndPort = @"qd_v1_getLocal";
@@ -41,9 +43,6 @@ static NSString *logHtml = @"document.getElementById('log').innerText += \"%@\n\
 static NSString *logDividerHtml = @"</div><div class='__log'>";
 static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
-static UIImageView *selfView;
-static UIImageView *remoteView;
-
 #define kDefaultStartURL @"http://www.openwebrtc.org/bowser"
 #define kSearchEngineURL @"http://www.google.com/search?q=%@"
 #define kBridgeLocalURL @"http://localhost:10717/owr.js"
@@ -53,6 +52,7 @@ static UIImageView *remoteView;
 @property (nonatomic, strong) NSMutableArray *consoleLogArray;
 @property (nonatomic, strong) NSMutableDictionary *mediaPermissionURLs;
 @property (nonatomic, strong) NSString *mediaPermissionsURLsFilePath;
+@property (nonatomic, strong) NSMutableDictionary *renderers;
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError;
 - (void)loadRequestWithURL:(NSString *)url;
@@ -74,6 +74,7 @@ static UIImageView *remoteView;
         "    var xhr = new XMLHttpRequest();"
         "    xhr.open(\"GET\", \"" kBridgeLocalURL "\", false);"
         "    xhr.send();"
+        "    window.navigator.__owrVideoOverlaySupport = true;"
         "    eval(xhr.responseText);"
         "    return \"ok\";"
         "})()";
@@ -120,14 +121,8 @@ static UIImageView *remoteView;
     self.historyTableView.layer.shadowRadius = 5.0;
     self.historyTableView.layer.shadowOpacity = 0.7;
 
-    //Make native video elements
-    UIImageView *aSelfView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    UIImageView *aRemoteView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    selfView = aSelfView;
-    remoteView = aRemoteView;
+    self.renderers = [NSMutableDictionary dictionary];
 
-    [self.browserView.scrollView addSubview:remoteView];
-    [self.browserView.scrollView addSubview:selfView];
     [self.headerView addSubview:self.bookmarkButton];
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
 }
@@ -393,6 +388,11 @@ static UIImageView *remoteView;
 #pragma mark webview delegate stuff
 - (void)webViewDidStartLoad:(BowserWebView *)webView
 {
+    [self.renderers enumerateKeysAndObjectsUsingBlock:^(NSString *tag, BowserImageView *videoView, BOOL *stop) {
+        owr_window_registry_unregister(owr_window_registry_get(), [tag UTF8String]);
+        [videoView removeFromSuperview];
+    }];
+    [self.renderers removeAllObjects];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSLog(@"webViewDidStartLoading...");
     self.progressBar.hidden = NO;
@@ -405,8 +405,6 @@ static UIImageView *remoteView;
                                                          selector:@selector(insertJavascript:)
                                                          userInfo:nil
                                                           repeats:YES];
-    [self newVideoRect:CGRectZero forSelfView:YES];
-    [self newVideoRect:CGRectZero forSelfView:NO];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -417,13 +415,19 @@ static UIImageView *remoteView;
     return YES;
 }
 
-- (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView
+- (void)newVideoRect:(CGRect)rect rotation:(int)degrees tag:(NSString *)tag
 {
-    if (rectIsSelfView) {
-        selfView.frame = rect;
-    } else {
-        remoteView.frame = rect;
+    BowserImageView *videoView = [self.renderers valueForKey:tag];
+
+    if (!videoView) {
+        videoView = [[BowserImageView alloc] initWithFrame:rect];
+        [self.renderers setObject:videoView forKey:tag];
+        [self.browserView.scrollView addSubview:videoView];
+        owr_window_registry_register(owr_window_registry_get(), [tag UTF8String], (__bridge gpointer)videoView);
     }
+
+    videoView.transform = CGAffineTransformMakeRotation(2 * M_PI * degrees / 360);
+    videoView.frame = rect;
 }
 
 - (void)webviewProgress:(float)progress
