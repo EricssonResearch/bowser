@@ -1,5 +1,12 @@
 # Bowser Release Notes
 
+## Version 0.5
+* Support for WebRTC DataChannel!
+* 64-bit support
+* Using CocoaPods (pod 'OpenWebRTC')
+* Possible to trigger Bowser to start using URL: bowser(s)://example.com (thanks Andy Ericksen!)
+* Lots of improvements in OpenWebRTC
+
 ## Version 0.4
 * Problems starting the app on older devices (<iPhone 5) should now be fixed!
 * Added support for new Promise based getUserMedia.

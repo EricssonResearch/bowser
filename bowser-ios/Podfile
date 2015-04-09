@@ -1,0 +1,5 @@
+platform :ios, '7.1'
+
+target 'Bowser' do
+    pod 'OpenWebRTC', '~> 0.1.4'
+end

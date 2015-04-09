@@ -1,0 +1,10 @@
+PODS:
+  - OpenWebRTC (0.1.4)
+
+DEPENDENCIES:
+  - OpenWebRTC (~> 0.1.4)
+
+SPEC CHECKSUMS:
+  OpenWebRTC: e143e98796c5f08ea7bd07985dffcaeff095b8a5
+
+COCOAPODS: 0.36.3

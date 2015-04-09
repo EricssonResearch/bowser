@@ -516,7 +516,7 @@ static UIImageView *remoteView;
 
 - (void)alertView:(BowserMediaAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"clicked index: %d", buttonIndex);
+    NSLog(@"clicked index: %ld", (long)buttonIndex);
     if (buttonIndex == 2 && alertView.host != NULL) {
         [self.mediaPermissionURLs setValue:[NSNumber numberWithBool:YES] forKey:alertView.host];
     }
