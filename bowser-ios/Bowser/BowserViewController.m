@@ -44,7 +44,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 static UIImageView *selfView;
 static UIImageView *remoteView;
 
-#define kDefaultStartURL @"http://www.openwebrtc.io/bowser"
+#define kDefaultStartURL @"http://www.openwebrtc.org/bowser"
 #define kSearchEngineURL @"http://www.google.com/search?q=%@"
 #define kBridgeLocalURL @"http://localhost:10717/owr.js"
 

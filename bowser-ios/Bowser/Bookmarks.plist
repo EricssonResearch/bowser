@@ -4,13 +4,13 @@
 <array>
 	<dict>
 		<key>url</key>
-		<string>http://demo.openwebrtc.io</string>
+		<string>http://demo.openwebrtc.org</string>
 		<key>title</key>
 		<string>Simple WebRTC Demo</string>
 	</dict>
 	<dict>
 		<key>url</key>
-		<string>http://www.openwebrtc.io</string>
+		<string>http://www.openwebrtc.org</string>
 		<key>title</key>
 		<string>OpenWebRTC</string>
 	</dict>
