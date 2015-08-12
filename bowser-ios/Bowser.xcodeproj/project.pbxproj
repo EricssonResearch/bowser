@@ -446,18 +446,7 @@
 				INFOPLIST_FILE = "Bowser/Bowser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)",
-					"$(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/lib/**",
-					"$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/lib/**",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/gio/modules",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/gstreamer-1.0",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/seed-gtk3",
-					"/Users/stefan/Developer/github/openwebrtc/out/arm-apple-darwin10/lib",
-					"/Users/stefan/Developer/github/openwebrtc/out/x86_64-apple-darwin/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					VideoToolbox,
@@ -491,18 +480,7 @@
 				INFOPLIST_FILE = "Bowser/Bowser-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)",
-					"$(SRCROOT)/../../openwebrtc/openwebrtc-deps-armv7-ios/lib/**",
-					"$(SRCROOT)/../../openwebrtc/out/arm-apple-darwin10/lib/**",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/gio/modules",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/gstreamer-1.0",
-					"/Users/stefan/Developer/github/openwebrtc/openwebrtc-deps-armv7-ios/lib/seed-gtk3",
-					"/Users/stefan/Developer/github/openwebrtc/out/arm-apple-darwin10/lib",
-					"/Users/stefan/Developer/github/openwebrtc/out/x86_64-apple-darwin/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					VideoToolbox,
