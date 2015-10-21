@@ -29,7 +29,6 @@
 
 #import "BowserAppDelegate.h"
 #import "BowserViewController.h"
-#import <AVFoundation/AVAudioSession.h>
 
 #define kUserAgent @"Mozilla/5.0 (iOS; like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) not Chrome/36.0.1500.95 Mobile/12B411 Safari/600.1.4 Bowser/%@"
 
@@ -41,9 +40,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"lllllslslslslslslsls");
-    NSError* theError = nil;
-    BOOL result = YES;
+    [OpenWebRTCViewController initOpenWebRTC];
 
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
