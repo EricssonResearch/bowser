@@ -41,9 +41,6 @@ static NSString *logHtml = @"document.getElementById('log').innerText += \"%@\n\
 static NSString *logDividerHtml = @"</div><div class='__log'>";
 static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
-static UIImageView *selfView;
-static UIImageView *remoteView;
-
 #define kDefaultStartURL @"http://www.openwebrtc.org/bowser"
 #define kSearchEngineURL @"http://www.google.com/search?q=%@"
 #define kBridgeLocalURL @"http://localhost:10717/owr.js"
@@ -51,11 +48,12 @@ static UIImageView *remoteView;
 @interface BowserViewController ()
 
 @property (nonatomic, strong) NSMutableArray *consoleLogArray;
+/*
 @property (nonatomic, strong) NSMutableDictionary *mediaPermissionURLs;
 @property (nonatomic, strong) NSString *mediaPermissionsURLsFilePath;
+*/
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError;
-- (void)loadRequestWithURL:(NSString *)url;
 
 @end
 
@@ -67,6 +65,7 @@ static UIImageView *remoteView;
     
     NSLog(@"BowserViewController viewDidLoad");
 
+    /*
     self.javascriptCode = @
         "(function () {"
         "    if (window.RTCPeerConnection)"
@@ -77,9 +76,10 @@ static UIImageView *remoteView;
         "    eval(xhr.responseText);"
         "    return \"ok\";"
         "})()";
+     */
 
     self.browserView.scrollView.delegate = self;
-    self.browserView.bowserDelegate = self;
+    self.browserView.owrDelegate = self;
     self.consoleLogView.scrollView.scrollsToTop = NO;
     self.consoleLogView.scrollView.bounces = NO;
     self.headerView.scrollsToTop = NO;
@@ -91,8 +91,10 @@ static UIImageView *remoteView;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     historyFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserHistory.plist"];
     bookmarksFilePath = [documentsDirectory stringByAppendingPathComponent:@"Bookmarks.plist"];
-    self.mediaPermissionsURLsFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserMediaPermissionURLs.plist"];
 
+    /*
+    self.mediaPermissionsURLsFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserMediaPermissionURLs.plist"];
+*/
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (![fileManager fileExistsAtPath:historyFilePath]) {
@@ -103,14 +105,20 @@ static UIImageView *remoteView;
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Bookmarks" ofType:@"plist"];
         [fileManager copyItemAtPath:filePath toPath:bookmarksFilePath error:&error];
     }
+    /*
     if (![fileManager fileExistsAtPath:self.mediaPermissionsURLsFilePath]) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BowserMediaPermissionURLs" ofType:@"plist"];
         [fileManager copyItemAtPath:filePath toPath:self.mediaPermissionsURLsFilePath error:&error];
     }
 
     self.mediaPermissionURLs = [[NSMutableDictionary alloc] initWithContentsOfFile:self.mediaPermissionsURLsFilePath];
+     */
+
     bowserHistory = [[NSMutableArray alloc] initWithContentsOfFile:historyFilePath];
+
+    /*
     [self.confirmView setUpView];
+*/
 
     canChange = YES;
     headerIsAbove = YES;
@@ -120,14 +128,12 @@ static UIImageView *remoteView;
     self.historyTableView.layer.shadowRadius = 5.0;
     self.historyTableView.layer.shadowOpacity = 0.7;
 
-    //Make native video elements
-    UIImageView *aSelfView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    UIImageView *aRemoteView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    selfView = aSelfView;
-    remoteView = aRemoteView;
+    // Make native video elements
+    self.selfView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
+    self.remoteView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
 
-    [self.browserView.scrollView addSubview:remoteView];
-    [self.browserView.scrollView addSubview:selfView];
+    [self.browserView.scrollView addSubview:self.remoteView];
+    [self.browserView.scrollView addSubview:self.selfView];
     [self.headerView addSubview:self.bookmarkButton];
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
 }
@@ -192,6 +198,7 @@ static UIImageView *remoteView;
     }
 }
 
+/*
 - (void)loadRequestWithURL:(NSString *)url
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
@@ -199,12 +206,15 @@ static UIImageView *remoteView;
                                          timeoutInterval:10];
     [self.browserView loadRequest:request];
 }
+ */
 
 - (IBAction)reloadButtonTapped:(id)sender
 {
+    /*
     if (!pageNavigationTimer.isValid) {
         pageNavigationTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(insertJavascript:) userInfo:nil repeats:YES];
     }
+     */
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [self loadRequestWithURL:self.lastURL];
 }
@@ -228,7 +238,9 @@ static UIImageView *remoteView;
 {
     if (buttonIndex == BowserMenuOptionClearHistory) {
         [bowserHistory removeAllObjects];
+        /*
         [self.mediaPermissionURLs removeAllObjects];
+         */
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
     } else if (buttonIndex == BowserMenuOptionShowConsole) {
         if (consoleIsVisible) {
@@ -278,7 +290,9 @@ static UIImageView *remoteView;
     [self.historyTableView reloadData];
     self.historyTableView.hidden = NO;
 
-    if (textField.text.length >0) [textField selectAll:nil];
+    if (textField.text.length > 0) {
+        [textField selectAll:nil];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -323,7 +337,7 @@ static UIImageView *remoteView;
     [self setProgressBar:nil];
     [self setBookmarkButton:nil];
     [self setHistoryTableView:nil];
-    [self setConfirmView:nil];
+    //[self setConfirmView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -378,6 +392,7 @@ static UIImageView *remoteView;
     canChange = YES;
 }
 
+/*
 - (void)insertJavascript: (NSTimer*) theTimer
 {
     //NSLog(@"timer, webview-url: %@", [self.browserView stringByEvaluatingJavaScriptFromString:@"document.location.href"]);
@@ -389,13 +404,16 @@ static UIImageView *remoteView;
         }
     }
 }
+ */
 
 #pragma mark webview delegate stuff
-- (void)webViewDidStartLoad:(BowserWebView *)webView
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSLog(@"webViewDidStartLoading...");
     self.progressBar.hidden = NO;
+
+    /*
     if (pageNavigationTimer.isValid)
         [pageNavigationTimer invalidate];
 
@@ -405,6 +423,7 @@ static UIImageView *remoteView;
                                                          selector:@selector(insertJavascript:)
                                                          userInfo:nil
                                                           repeats:YES];
+     */
     [self newVideoRect:CGRectZero forSelfView:YES];
     [self newVideoRect:CGRectZero forSelfView:NO];
 }
@@ -420,9 +439,9 @@ static UIImageView *remoteView;
 - (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView
 {
     if (rectIsSelfView) {
-        selfView.frame = rect;
+        self.selfView.frame = rect;
     } else {
-        remoteView.frame = rect;
+        self.remoteView.frame = rect;
     }
 }
 
@@ -434,9 +453,9 @@ static UIImageView *remoteView;
     }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    NSURL *currentURL = webView.request.URL;
+    NSURL *currentURL = webView.URL;
     self.urlField.text = currentURL.absoluteString;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     self.lastURL = currentURL.absoluteString;
@@ -444,8 +463,10 @@ static UIImageView *remoteView;
     [[NSUserDefaults standardUserDefaults] setValue:self.lastURL forKey:@"lastURL"];
     NSLog(@"webViewDidFinishLoading... %@", self.lastURL);
 
+    /*
     if (pageNavigationTimer.isValid)
         [pageNavigationTimer invalidate];
+     */
 
     BOOL urlAlreadyExists = NO;
     for (NSDictionary *historyPost in bowserHistory) {
@@ -455,7 +476,7 @@ static UIImageView *remoteView;
         }
     }
     if (!urlAlreadyExists) {
-        NSString *pageTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        NSString *pageTitle = webView.title;
         if (pageTitle.length == 0) {
             pageTitle = @"No title";
         }
@@ -469,11 +490,14 @@ static UIImageView *remoteView;
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //self.urlField.text = self.lastURL;
+    /*
     [pageNavigationTimer invalidate];
+     */
+
     NSLog(@"WEBVIEW LOADING ERROR ---- %@", [error description]);
     if (error.code == -999) {
         NSLog(@"Error: %@", error.localizedDescription);
@@ -485,7 +509,7 @@ static UIImageView *remoteView;
                       cancelButtonTitle:@"Close"
                       otherButtonTitles: nil] show];
 }
-
+/*
 - (void)showUserMediaRequestPermissionViewwithRequestId:(NSString *)requestId
 {
     NSString *currentHost = [self.browserView getCurrentHost];
@@ -495,24 +519,9 @@ static UIImageView *remoteView;
             return;
         }
     }
-    /* :::::INFO: Uncomment and remove the line below, if the custom confirm view should be used
-    [self.confirmView presentWithTitle:[NSString stringWithFormat:@"%@ wants to use your camera and microphone", currentHost] andRequestId:requestId];
-    [self.browserView shrink];
-     */
+
     [[[BowserMediaAlertView alloc] initWithRequestId:requestId forHost:currentHost withDelegate:self] show];
 }
-
-/* :::::INFO: This method is never called. Is called if the custom confirm view is used
--(void)bowserConfirmViewResponded:(BOOL)response withRequestId:(NSString *)requestId willRememberResponse:(BOOL)willRemember{
-    [self.browserView restore];
-    if (willRemember) {
-        NSString *currentHost = [self.browserView getCurrentHost];
-        if (currentHost) {
-            [self.mediaPermissionURLs setValue:[NSNumber numberWithBool:response] forKey:currentHost];
-        }
-    }
-}
- */
 
 - (void)alertView:(BowserMediaAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -521,6 +530,8 @@ static UIImageView *remoteView;
         [self.mediaPermissionURLs setValue:[NSNumber numberWithBool:YES] forKey:alertView.host];
     }
 }
+ */
+
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError
 {
 /*    NSLog(@"New console.log string: %@", logString);*/
@@ -544,20 +555,17 @@ static UIImageView *remoteView;
 {
     [UIView animateWithDuration:0.4 animations:^(void) {
         view.frame = CGRectMake(0, self.view.bounds.size.height-view.bounds.size.height, view.frame.size.width, view.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 - (void)slideDownView:(UIView*)view
 {
     [UIView animateWithDuration:0.4 animations:^(void){
         view.frame = CGRectMake(0, self.view.bounds.size.height, view.frame.size.width, view.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
+/*
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -566,10 +574,11 @@ static UIImageView *remoteView;
         return !self.confirmView.isActive;
     }
 }
+ */
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    self.headerView.contentSize = CGSizeMake(self.headerView.bounds.size.width+1, self.headerView.bounds.size.height);
+    self.headerView.contentSize = CGSizeMake(self.headerView.bounds.size.width + 1, self.headerView.bounds.size.height);
 }
 
 - (IBAction)showConsole:(UIButton*)consoleButton
@@ -635,7 +644,10 @@ static UIImageView *remoteView;
 - (void)saveFiles
 {
     [bowserHistory writeToFile:historyFilePath atomically:YES];
+    /*
     [self.mediaPermissionURLs writeToFile:self.mediaPermissionsURLsFilePath atomically:YES];
+     */
+
     NSLog(@"writing files!");
 }
 
@@ -648,8 +660,8 @@ static UIImageView *remoteView;
     } else if ([segue.identifier isEqualToString:@"addBookmarkSegue"]) {
         UINavigationController *navController = segue.destinationViewController;
         AddBookmarkViewController *abvc = [navController viewControllers][0];
-        abvc.bookmarkTitle = [self.browserView stringByEvaluatingJavaScriptFromString:@"document.title"];
-        abvc.bookmarkURL = [self.browserView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+        abvc.bookmarkTitle = self.browserView.title;
+        abvc.bookmarkURL = [self.browserView.URL absoluteString];
     }
 }
 

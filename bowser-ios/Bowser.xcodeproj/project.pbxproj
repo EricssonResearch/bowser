@@ -13,11 +13,7 @@
 		6C77B9C11599A7C200AFECC2 /* BowserHistory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C77B9C01599A7C200AFECC2 /* BowserHistory.plist */; };
 		6C77B9CC1599D93F00AFECC2 /* BowserFavicon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */; };
 		6C77B9D71599E1D700AFECC2 /* BowserHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C77B9D61599E1D600AFECC2 /* BowserHistoryTableViewCell.m */; };
-		6CB480391642972C00425E13 /* BowserMediaPermissionURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */; };
 		6CE852B51593503F00404367 /* BowserWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE852B41593503F00404367 /* BowserWebView.m */; };
-		6CEFE68E164954010030C290 /* BowserMediaAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEFE68D164954010030C290 /* BowserMediaAlertView.m */; };
-		749EFA2C19A3D0AA00107C9A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 749EFA2B19A3D0AA00107C9A /* libc++.dylib */; };
-		749EFA2E19A3D0B300107C9A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 749EFA2D19A3D0B200107C9A /* libresolv.dylib */; };
 		B7E3D0E015625681003DE0F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7E3D0DE15625681003DE0F1 /* InfoPlist.strings */; };
 		B7E3D0E215625681003DE0F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E3D0E115625681003DE0F1 /* main.m */; };
 		B7E3D0E615625681003DE0F1 /* BowserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E3D0E515625681003DE0F1 /* BowserAppDelegate.m */; };
@@ -30,6 +26,8 @@
 		F84D76DD19A368C20039552D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84D76DC19A368C20039552D /* Images.xcassets */; };
 		F89E07B615F8CB5B00262F59 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A82AEC15F8C00E003460E5 /* AboutViewController.m */; };
 		F8AE2FC219D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */; };
+		F8E9CB4B1BD4C1B5006ED336 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */; };
+		F8E9CB4D1BD4C1C1006ED336 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */; };
 		F8F3813019D00A6300A1B471 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8F3812F19D00A6300A1B471 /* Launch Screen.xib */; };
 /* End PBXBuildFile section */
 
@@ -43,13 +41,8 @@
 		6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserFavicon.m; sourceTree = "<group>"; };
 		6C77B9D51599E1D600AFECC2 /* BowserHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowserHistoryTableViewCell.h; sourceTree = "<group>"; };
 		6C77B9D61599E1D600AFECC2 /* BowserHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserHistoryTableViewCell.m; sourceTree = "<group>"; };
-		6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BowserMediaPermissionURLs.plist; sourceTree = "<group>"; };
 		6CE852B31593503F00404367 /* BowserWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowserWebView.h; sourceTree = "<group>"; };
 		6CE852B41593503F00404367 /* BowserWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserWebView.m; sourceTree = "<group>"; };
-		6CEFE68C164954010030C290 /* BowserMediaAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowserMediaAlertView.h; sourceTree = "<group>"; };
-		6CEFE68D164954010030C290 /* BowserMediaAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowserMediaAlertView.m; sourceTree = "<group>"; };
-		749EFA2B19A3D0AA00107C9A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		749EFA2D19A3D0B200107C9A /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		B7E3D0D115625681003DE0F1 /* Bowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E3D0DD15625681003DE0F1 /* Bowser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bowser-Info.plist"; sourceTree = "<group>"; };
 		B7E3D0DF15625681003DE0F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -73,6 +66,9 @@
 		F8A82AEB15F8C00E003460E5 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ../AboutViewController.h; sourceTree = "<group>"; };
 		F8A82AEC15F8C00E003460E5 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = ../AboutViewController.m; sourceTree = "<group>"; };
 		F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OpenWebRTC-Logo-w400.png"; path = "../OpenWebRTC-Logo-w400.png"; sourceTree = "<group>"; };
+		F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		F8E9CB571BD61222006ED336 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F8F3812F19D00A6300A1B471 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,8 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				749EFA2E19A3D0B300107C9A /* libresolv.dylib in Frameworks */,
-				749EFA2C19A3D0AA00107C9A /* libc++.dylib in Frameworks */,
+				F8E9CB4D1BD4C1C1006ED336 /* libc++.tbd in Frameworks */,
+				F8E9CB4B1BD4C1B5006ED336 /* libresolv.tbd in Frameworks */,
 				4CE203E180B450A9FB63C713 /* libPods-Bowser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,8 +117,9 @@
 		B7E3D0D415625681003DE0F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				749EFA2D19A3D0B200107C9A /* libresolv.dylib */,
-				749EFA2B19A3D0AA00107C9A /* libc++.dylib */,
+				F8E9CB571BD61222006ED336 /* WebKit.framework */,
+				F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */,
+				F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */,
 				4D1E82A2640957E047AA70DA /* libPods-Bowser.a */,
 			);
 			name = Frameworks;
@@ -143,7 +140,6 @@
 				6CE852B31593503F00404367 /* BowserWebView.h */,
 				6CE852B41593503F00404367 /* BowserWebView.m */,
 				6C77B9C01599A7C200AFECC2 /* BowserHistory.plist */,
-				6CB480381642972C00425E13 /* BowserMediaPermissionURLs.plist */,
 				6C77B9CA1599D93F00AFECC2 /* BowserFavicon.h */,
 				6C77B9CB1599D93F00AFECC2 /* BowserFavicon.m */,
 				6C77B9D51599E1D600AFECC2 /* BowserHistoryTableViewCell.h */,
@@ -152,8 +148,6 @@
 				F8A82AEC15F8C00E003460E5 /* AboutViewController.m */,
 				6C733902163ED77B001908E5 /* BowserConfirmView.h */,
 				6C733903163ED77B001908E5 /* BowserConfirmView.m */,
-				6CEFE68C164954010030C290 /* BowserMediaAlertView.h */,
-				6CEFE68D164954010030C290 /* BowserMediaAlertView.m */,
 			);
 			path = Bowser;
 			sourceTree = "<group>";
@@ -268,7 +262,6 @@
 				F8AE2FC219D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png in Resources */,
 				F84D76DD19A368C20039552D /* Images.xcassets in Resources */,
 				6C2B891E16270E5C004FA15F /* about.html in Resources */,
-				6CB480391642972C00425E13 /* BowserMediaPermissionURLs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +315,6 @@
 				F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */,
 				6C733904163ED77B001908E5 /* BowserConfirmView.m in Sources */,
 				F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */,
-				6CEFE68E164954010030C290 /* BowserMediaAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,9 +381,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -422,9 +415,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
