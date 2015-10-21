@@ -40,6 +40,7 @@
 
 @implementation BowserWebView
 
+/*
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -50,11 +51,14 @@
     }
     return self;
 }
+ */
 
+/*
 - (BOOL)isOnPageWithURL: (NSString*) urlString
 {
     return ([[self stringByEvaluatingJavaScriptFromString:@"window.location.href"] rangeOfString:urlString].location != NSNotFound);
 }
+
 
 - (NSString *)getCurrentHost
 {
@@ -71,7 +75,7 @@
 {
     [super webView:view resource:resource didFailLoadingWithError:error fromDataSource:dataSource];
     resourceCompletedCount++;
-/*    NSLog(@"completed fail: %d, total: %d", resourceCompletedCount, resourceCount);*/
+    NSLog(@"completed fail: %d, total: %d", resourceCompletedCount, resourceCount);
     [self setProgress:resourceCompletedCount ofTotal:resourceCount];
 }
 
@@ -93,11 +97,11 @@
     } else {
         progress = ((float)done)/((float)total);
     }
-    if ([self.delegate respondsToSelector:@selector(webviewProgress:)]) {
-        [self.bowserDelegate webviewProgress:progress];
+    if ([self.owrDelegate respondsToSelector:@selector(webviewProgress:)]) {
+        [self.owrDelegate webviewProgress:progress];
     }
-
 }
+*/
 
 - (void)shrink
 {
@@ -125,9 +129,10 @@
         CGFloat width = [[messageComps objectAtIndex:4] floatValue] - x;
         CGFloat height = [[messageComps objectAtIndex:5] floatValue] - y;
         CGRect newRect = CGRectMake(x * sf, y * sf, width * sf, height * sf);
-        [self.bowserDelegate newVideoRect:newRect forSelfView:[[messageComps objectAtIndex:1] boolValue]];
+        [self.owrDelegate newVideoRect:newRect forSelfView:[[messageComps objectAtIndex:1] boolValue]];
     } else {
-        [super webView:sender runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame];
+        //[super webView:sender runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame];
+        NSLog(@"WARNING! owr-message:video-rect NOT handled");
     }
 }
 

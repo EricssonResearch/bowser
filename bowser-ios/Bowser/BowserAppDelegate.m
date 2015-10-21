@@ -41,6 +41,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"lllllslslslslslslsls");
     NSError* theError = nil;
     BOOL result = YES;
 
@@ -53,6 +54,7 @@
                                                          forKey:@"UserAgent"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 
+    /*
     AVAudioSession* myAudioSession = [AVAudioSession sharedInstance];
 
     result = [myAudioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&theError];
@@ -64,6 +66,7 @@
     if (!result) {
         NSLog(@"setActive failed");
     }
+     */
 
     // Override point for customization after application launch.
     return YES;

@@ -28,10 +28,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BowserWebView.h"
+#import <OpenWebRTC-SDK/OpenWebRTCViewController.h>
+
+//#import "BowserWebView.h"
 #import "AboutViewController.h"
-#import "BowserConfirmView.h"
-#import "BowserMediaAlertView.h"
+//#import "BowserConfirmView.h"
+//#import "BowserMediaAlertView.h"
 #import "BookmarksViewController.h"
 #import "AddBookmarkViewController.h"
 
@@ -43,7 +45,7 @@ typedef enum {
     BowserMenuOptionAddBookmark,
 } BowserMenuOption;
 
-@interface BowserViewController : UIViewController <UIWebViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, BowserWebViewDelegate, BookmarkSelectionDelegate, UIAlertViewDelegate>
+@interface BowserViewController : OpenWebRTCViewController <UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, BookmarkSelectionDelegate, UIAlertViewDelegate>
 {
     bool canChange;
     bool headerIsAbove;
@@ -51,7 +53,6 @@ typedef enum {
     bool bookmarksAreVisible;
     NSMutableArray *bowserHistory;
     NSArray *filteredHistory;
-    NSTimer *pageNavigationTimer;
     __strong NSString *historyFilePath, *bookmarksFilePath;
 }
 
@@ -59,14 +60,13 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet UIScrollView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
-@property (weak, nonatomic) IBOutlet BowserWebView *browserView;
+//@property (weak, nonatomic) IBOutlet BowserWebView *browserView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-@property (weak, nonatomic) IBOutlet BowserConfirmView *confirmView;
+//@property (weak, nonatomic) IBOutlet BowserConfirmView *confirmView;
 
 @property (weak, nonatomic) IBOutlet UITextField *urlField;
 @property (weak, nonatomic) IBOutlet UIWebView *consoleLogView;
 @property (nonatomic, strong) NSString *lastURL;
-@property (nonatomic, strong) NSString *javascriptCode;
 @property (weak, nonatomic) IBOutlet UIView *bookMarkView;
 
 - (void)saveFiles;

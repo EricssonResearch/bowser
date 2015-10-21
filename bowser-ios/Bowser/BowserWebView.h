@@ -28,7 +28,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <OpenWebRTC-SDK/OpenWebRTCWebView.h>
 
+/*
 @protocol BowserWebViewDelegate <NSObject>
 
 @optional
@@ -37,18 +39,19 @@
 - (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView;
 @end
 
-@interface BowserWebView : UIWebView
-{
-    int resourceCount;
-    int resourceCompletedCount;
-}
+ */
 
-@property (assign) id<BowserWebViewDelegate> bowserDelegate;
-@property (nonatomic) BOOL webGLEnabled;
 
-- (BOOL)isOnPageWithURL:(NSString *)urlString;
+@interface BowserWebView : OpenWebRTCWebView
+
+//@property (assign) id<BowserWebViewDelegate> bowserDelegate;
+//@property (nonatomic) BOOL webGLEnabled;
+
+//- (BOOL)isOnPageWithURL:(NSString *)urlString;
+
 - (void)shrink;
 - (void)restore;
-- (NSString *)getCurrentHost;
+
+//- (NSString *)getCurrentHost;
 
 @end

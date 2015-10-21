@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "247C5AB018CDD92E26F7EDC3AAE761AD77DEFEB5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1EAEDA1860BC864C82183E598213282A44A6A79E" : 0,
+    "247C5AB018CDD92E26F7EDC3AAE761AD77DEFEB5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CB0CF6C6-5060-41DD-B48D-352F862C01E5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1EAEDA1860BC864C82183E598213282A44A6A79E" : "openwebrtc-ios-sdk\/",
+    "247C5AB018CDD92E26F7EDC3AAE761AD77DEFEB5" : "my-bowser\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Bowser",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "bowser-ios\/Bowser.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/EricssonResearch\/openwebrtc-ios-sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1EAEDA1860BC864C82183E598213282A44A6A79E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/stefanalund\/bowser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "247C5AB018CDD92E26F7EDC3AAE761AD77DEFEB5"
+    }
+  ]
+}
