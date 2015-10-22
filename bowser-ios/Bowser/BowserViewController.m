@@ -65,19 +65,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     
     NSLog(@"BowserViewController viewDidLoad");
 
-    /*
-    self.javascriptCode = @
-        "(function () {"
-        "    if (window.RTCPeerConnection)"
-        "        return \"\";"
-        "    var xhr = new XMLHttpRequest();"
-        "    xhr.open(\"GET\", \"" kBridgeLocalURL "\", false);"
-        "    xhr.send();"
-        "    eval(xhr.responseText);"
-        "    return \"ok\";"
-        "})()";
-     */
-
     self.browserView.scrollView.delegate = self;
     self.browserView.owrDelegate = self;
     self.consoleLogView.scrollView.scrollsToTop = NO;
@@ -163,9 +150,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
                    withObject:nil
                 waitUntilDone:NO];
 
-        NSLog(@"OWR bridge starting...");
-        owr_bridge_start_in_thread();
-        NSLog(@"OWR bridge started");
+        // Initialisation is a blocking.
+        [OpenWebRTCViewController initOpenWebRTC];
 
         [self dismissViewControllerAnimated:YES completion:^{
             // Let's get started...
@@ -198,23 +184,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     }
 }
 
-/*
-- (void)loadRequestWithURL:(NSString *)url
-{
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                         timeoutInterval:10];
-    [self.browserView loadRequest:request];
-}
- */
-
 - (IBAction)reloadButtonTapped:(id)sender
 {
-    /*
-    if (!pageNavigationTimer.isValid) {
-        pageNavigationTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(insertJavascript:) userInfo:nil repeats:YES];
-    }
-     */
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [self loadRequestWithURL:self.lastURL];
 }
