@@ -75,16 +75,6 @@
                                     <outlet property="delegate" destination="2" id="pGi-VN-RGn"/>
                                 </connections>
                             </view>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" id="A4w-9N-GIe" customClass="BowserWebView">
-                                <rect key="frame" x="0.0" y="69" width="320" height="411"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="sfw-Af-Poj"/>
-                                </connections>
-                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dSQ-4a-LBD" userLabel="bookmark button">
                                 <rect key="frame" x="287" y="22" width="22" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -200,87 +190,6 @@
                                     <outlet property="delegate" destination="2" id="5eI-LW-jBF"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" id="pRg-TY-QpM" userLabel="Media permission confirm view" customClass="BowserConfirmView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" text="Confirm Text?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dUb-He-Kk0">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="EEj-9M-RdF">
-                                        <rect key="frame" x="-160" y="205" width="160" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                        <state key="normal" title="No">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="noClicked" destination="pRg-TY-QpM" eventType="touchUpInside" id="EA9-CE-292"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="AKn-gd-sL0">
-                                        <rect key="frame" x="320" y="205" width="160" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                        <state key="normal" title="Yes">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="yesClicked" destination="pRg-TY-QpM" eventType="touchUpInside" id="jH2-Eu-vD2"/>
-                                        </connections>
-                                    </button>
-                                    <view alpha="0.0" contentMode="scaleToFill" id="yky-d4-rKQ">
-                                        <rect key="frame" x="0.0" y="481" width="320" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="omh-au-cSh">
-                                                <rect key="frame" x="10" y="6" width="51" height="31"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <color key="onTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </switch>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Remember for this page" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5d2-ch-GTa">
-                                                <rect key="frame" x="100" y="6" width="200" height="28"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="i5w-re-tuL"/>
-                                    <outlet property="noButton" destination="EEj-9M-RdF" id="QPu-jC-fib"/>
-                                    <outlet property="rememberSwitch" destination="omh-au-cSh" id="MEv-SA-7l2"/>
-                                    <outlet property="rememberView" destination="yky-d4-rKQ" id="cUh-dG-prr"/>
-                                    <outlet property="titleLabel" destination="dUb-He-Kk0" id="6bA-4W-iYb"/>
-                                    <outlet property="yesButton" destination="AKn-gd-sL0" id="aen-kE-2np"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -290,8 +199,6 @@
                     <connections>
                         <outlet property="bookMarkView" destination="3WC-Dp-A4c" id="2Mt-pL-1HS"/>
                         <outlet property="bookmarkButton" destination="dSQ-4a-LBD" id="qaV-mh-Afx"/>
-                        <outlet property="browserView" destination="A4w-9N-GIe" id="w3c-JB-at2"/>
-                        <outlet property="confirmView" destination="pRg-TY-QpM" id="lAc-CK-1dd"/>
                         <outlet property="consoleLogView" destination="NTr-LR-fQp" id="Uao-Se-DJA"/>
                         <outlet property="headerView" destination="KB3-NF-kqA" id="MRf-fk-66s"/>
                         <outlet property="historyTableView" destination="GRY-3v-31k" id="pe0-S8-Qrk"/>
