@@ -30,10 +30,7 @@
 #import <UIKit/UIKit.h>
 #import <OpenWebRTC-SDK/OpenWebRTCViewController.h>
 
-//#import "BowserWebView.h"
 #import "AboutViewController.h"
-//#import "BowserConfirmView.h"
-//#import "BowserMediaAlertView.h"
 #import "BookmarksViewController.h"
 #import "AddBookmarkViewController.h"
 
@@ -60,9 +57,7 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet UIScrollView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
-//@property (weak, nonatomic) IBOutlet BowserWebView *browserView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
-//@property (weak, nonatomic) IBOutlet BowserConfirmView *confirmView;
 
 @property (weak, nonatomic) IBOutlet UITextField *urlField;
 @property (weak, nonatomic) IBOutlet UIWebView *consoleLogView;
