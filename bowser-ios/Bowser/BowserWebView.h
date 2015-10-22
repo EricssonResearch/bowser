@@ -30,28 +30,9 @@
 #import <UIKit/UIKit.h>
 #import <OpenWebRTC-SDK/OpenWebRTCWebView.h>
 
-/*
-@protocol BowserWebViewDelegate <NSObject>
-
-@optional
-- (void)webviewProgress:(float)progress;
-- (void)newOwrMessage:(NSString*)message;
-- (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView;
-@end
-
- */
-
-
 @interface BowserWebView : OpenWebRTCWebView
-
-//@property (assign) id<BowserWebViewDelegate> bowserDelegate;
-//@property (nonatomic) BOOL webGLEnabled;
-
-//- (BOOL)isOnPageWithURL:(NSString *)urlString;
 
 - (void)shrink;
 - (void)restore;
-
-//- (NSString *)getCurrentHost;
 
 @end
