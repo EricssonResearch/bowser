@@ -40,8 +40,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [OpenWebRTCViewController initOpenWebRTC];
-
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
@@ -51,21 +49,6 @@
                                                          forKey:@"UserAgent"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 
-    /*
-    AVAudioSession* myAudioSession = [AVAudioSession sharedInstance];
-
-    result = [myAudioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&theError];
-    if (!result) {
-        NSLog(@"setCategory failed");
-    }
-
-    result = [myAudioSession setActive:YES error:&theError];
-    if (!result) {
-        NSLog(@"setActive failed");
-    }
-     */
-
-    // Override point for customization after application launch.
     return YES;
 }
 
