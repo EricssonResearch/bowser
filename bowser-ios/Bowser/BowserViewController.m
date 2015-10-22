@@ -48,10 +48,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 @interface BowserViewController ()
 
 @property (nonatomic, strong) NSMutableArray *consoleLogArray;
-/*
-@property (nonatomic, strong) NSMutableDictionary *mediaPermissionURLs;
-@property (nonatomic, strong) NSString *mediaPermissionsURLsFilePath;
-*/
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError;
 
@@ -70,7 +66,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     self.consoleLogView.scrollView.scrollsToTop = NO;
     self.consoleLogView.scrollView.bounces = NO;
     self.headerView.scrollsToTop = NO;
-    self.headerView.contentSize = CGSizeMake(self.view.bounds.size.width+1, self.headerView.bounds.size.height);
+    self.headerView.contentSize = CGSizeMake(self.view.bounds.size.width + 1, self.headerView.bounds.size.height);
     consoleIsVisible = NO;
     bookmarksAreVisible = NO;
     NSError *error;
@@ -79,9 +75,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     historyFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserHistory.plist"];
     bookmarksFilePath = [documentsDirectory stringByAppendingPathComponent:@"Bookmarks.plist"];
 
-    /*
-    self.mediaPermissionsURLsFilePath = [documentsDirectory stringByAppendingPathComponent:@"BowserMediaPermissionURLs.plist"];
-*/
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (![fileManager fileExistsAtPath:historyFilePath]) {
@@ -92,20 +85,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Bookmarks" ofType:@"plist"];
         [fileManager copyItemAtPath:filePath toPath:bookmarksFilePath error:&error];
     }
-    /*
-    if (![fileManager fileExistsAtPath:self.mediaPermissionsURLsFilePath]) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"BowserMediaPermissionURLs" ofType:@"plist"];
-        [fileManager copyItemAtPath:filePath toPath:self.mediaPermissionsURLsFilePath error:&error];
-    }
-
-    self.mediaPermissionURLs = [[NSMutableDictionary alloc] initWithContentsOfFile:self.mediaPermissionsURLsFilePath];
-     */
-
     bowserHistory = [[NSMutableArray alloc] initWithContentsOfFile:historyFilePath];
-
-    /*
-    [self.confirmView setUpView];
-*/
 
     canChange = YES;
     headerIsAbove = YES;
@@ -123,12 +103,16 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     [self.browserView.scrollView addSubview:self.selfView];
     [self.headerView addSubview:self.bookmarkButton];
     [self.consoleLogView loadHTMLString:[startHtml stringByAppendingString:@"</div></body>"] baseURL:nil];
+
+    // Observe loading progress.
+    [self.browserView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    static BOOL isBridgeInitialized = NO;
-    if (isBridgeInitialized)
+    static BOOL isInitialLoad = YES;
+    if (!isInitialLoad)
         return;
 
     BowserAppDelegate *bowserAppDelegate = (BowserAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -160,7 +144,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
         }];
     });
 
-    isBridgeInitialized = YES;
+    isInitialLoad = NO;
 }
 
 - (void)presentInitializingMessage
@@ -173,7 +157,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"launchURL"]){
+    if ([keyPath isEqualToString:@"launchURL"]) {
         NSString *startURL = change[@"new"];
         
         if(![startURL isEqual:nil] && ![startURL isEqualToString:@""]){
@@ -181,6 +165,10 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
             
             [self loadRequestWithURL:startURL];
         }
+    } else if ([keyPath isEqualToString:@"estimatedProgress"] && object == self.browserView) {
+        [self webviewProgress:self.browserView.estimatedProgress];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
@@ -209,9 +197,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 {
     if (buttonIndex == BowserMenuOptionClearHistory) {
         [bowserHistory removeAllObjects];
-        /*
-        [self.mediaPermissionURLs removeAllObjects];
-         */
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
     } else if (buttonIndex == BowserMenuOptionShowConsole) {
         if (consoleIsVisible) {
@@ -308,9 +293,9 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     [self setProgressBar:nil];
     [self setBookmarkButton:nil];
     [self setHistoryTableView:nil];
-    //[self setConfirmView:nil];
+    [self.browserView removeObserver:self forKeyPath:@"estimatedProgress"];
+
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 #pragma mark scroll view delegate methods
@@ -363,41 +348,18 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     canChange = YES;
 }
 
-/*
-- (void)insertJavascript: (NSTimer*) theTimer
-{
-    //NSLog(@"timer, webview-url: %@", [self.browserView stringByEvaluatingJavaScriptFromString:@"document.location.href"]);
-    if([self.browserView isOnPageWithURL:self.urlField.text]){
-        NSLog(@"injecting bootstrap script");
-        if ([self.browserView stringByEvaluatingJavaScriptFromString:self.javascriptCode].length > 0) {
-            NSLog(@"stopping timer");
-            [theTimer invalidate];
-        }
-    }
-}
- */
-
 #pragma mark webview delegate stuff
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSLog(@"webViewDidStartLoading...");
     self.progressBar.hidden = NO;
-
-    /*
-    if (pageNavigationTimer.isValid)
-        [pageNavigationTimer invalidate];
-
-    NSLog(@"creating timer");
-    pageNavigationTimer = [NSTimer scheduledTimerWithTimeInterval:0
-                                                           target:self
-                                                         selector:@selector(insertJavascript:)
-                                                         userInfo:nil
-                                                          repeats:YES];
-     */
     [self newVideoRect:CGRectZero forSelfView:YES];
     [self newVideoRect:CGRectZero forSelfView:NO];
 }
+
+/*
+ TODO: Adapt to WKWebView?
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -406,6 +368,7 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     }
     return YES;
 }
+ */
 
 - (void)newVideoRect:(CGRect)rect forSelfView:(BOOL)rectIsSelfView
 {
@@ -421,6 +384,11 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     [self.progressBar setProgress:progress];
     if (progress == 0) {
         self.progressBar.hidden = YES;
+    } else if (progress == 1.0) {
+        // Let the user see that loading completed.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            self.progressBar.hidden = YES;
+        });
     }
 }
 
@@ -433,11 +401,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
     [[NSUserDefaults standardUserDefaults] setValue:self.lastURL forKey:@"lastURL"];
     NSLog(@"webViewDidFinishLoading... %@", self.lastURL);
-
-    /*
-    if (pageNavigationTimer.isValid)
-        [pageNavigationTimer invalidate];
-     */
 
     BOOL urlAlreadyExists = NO;
     for (NSDictionary *historyPost in bowserHistory) {
@@ -465,9 +428,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //self.urlField.text = self.lastURL;
-    /*
-    [pageNavigationTimer invalidate];
-     */
 
     NSLog(@"WEBVIEW LOADING ERROR ---- %@", [error description]);
     if (error.code == -999) {
@@ -480,32 +440,10 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
                       cancelButtonTitle:@"Close"
                       otherButtonTitles: nil] show];
 }
-/*
-- (void)showUserMediaRequestPermissionViewwithRequestId:(NSString *)requestId
-{
-    NSString *currentHost = [self.browserView getCurrentHost];
-    if (currentHost) {
-        id dictionaryPost = [self.mediaPermissionURLs objectForKey:currentHost];
-        if (dictionaryPost) {
-            return;
-        }
-    }
-
-    [[[BowserMediaAlertView alloc] initWithRequestId:requestId forHost:currentHost withDelegate:self] show];
-}
-
-- (void)alertView:(BowserMediaAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"clicked index: %ld", (long)buttonIndex);
-    if (buttonIndex == 2 && alertView.host != NULL) {
-        [self.mediaPermissionURLs setValue:[NSNumber numberWithBool:YES] forKey:alertView.host];
-    }
-}
- */
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError
 {
-/*    NSLog(@"New console.log string: %@", logString);*/
+    NSLog(@"New console.log string: %@", logString);
 
     if (self.consoleLogArray == nil)
         self.consoleLogArray = [NSMutableArray array];
@@ -535,17 +473,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
         view.frame = CGRectMake(0, self.view.bounds.size.height, view.frame.size.width, view.frame.size.height);
     } completion:nil];
 }
-
-/*
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return !self.confirmView.isActive && interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
-    } else {
-        return !self.confirmView.isActive;
-    }
-}
- */
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
@@ -614,12 +541,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
 - (void)saveFiles
 {
-    [bowserHistory writeToFile:historyFilePath atomically:YES];
-    /*
-    [self.mediaPermissionURLs writeToFile:self.mediaPermissionsURLsFilePath atomically:YES];
-     */
-
     NSLog(@"writing files!");
+    [bowserHistory writeToFile:historyFilePath atomically:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
