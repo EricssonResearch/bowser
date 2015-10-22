@@ -88,7 +88,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     bowserHistory = [[NSMutableArray alloc] initWithContentsOfFile:historyFilePath];
 
     canChange = YES;
-    headerIsAbove = YES;
+    headerIsAbove = NO;
+
     self.historyTableView.layer.borderWidth = 2.0;
     self.historyTableView.layer.borderColor = [UIColor blackColor].CGColor;
     self.historyTableView.layer.shadowColor = [UIColor grayColor].CGColor;
@@ -106,7 +107,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
     // Observe loading progress.
     [self.browserView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -352,14 +352,16 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSLog(@"webViewDidStartLoading...");
+    self.urlField.text = webView.URL.absoluteString;
+
+    NSLog(@"webViewDidStartLoading... %@", webView.URL.absoluteString);
     self.progressBar.hidden = NO;
     [self newVideoRect:CGRectZero forSelfView:YES];
     [self newVideoRect:CGRectZero forSelfView:NO];
 }
 
 /*
- TODO: Adapt to WKWebView?
+ TODO: Adapt to WKWebView? Maybe webView:didCommitNavigation: above is enough.
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
