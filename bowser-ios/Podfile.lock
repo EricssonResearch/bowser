@@ -1,6 +1,6 @@
 PODS:
   - OpenWebRTC (0.3.1)
-  - OpenWebRTC-SDK (0.2.0):
+  - OpenWebRTC-SDK (0.2.1):
     - OpenWebRTC
 
 DEPENDENCIES:
@@ -13,6 +13,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   OpenWebRTC: 85be1caf6dc45b11106eacba93de61e3e52b1cf8
-  OpenWebRTC-SDK: f0cd2580e2c38df80a885dec05efa7b20ca8b080
+  OpenWebRTC-SDK: 00307dcfec69374f537c0cead2cd5bcfb33057d7
 
 COCOAPODS: 0.38.2
