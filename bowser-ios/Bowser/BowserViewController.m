@@ -257,8 +257,8 @@ static UIImageView *remoteView;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSString *urlString;
-    int colonPos = [textField.text rangeOfString:@":"].location;
-    int dotPos = [textField.text rangeOfString:@"."].location;
+    NSUInteger colonPos = [textField.text rangeOfString:@":"].location;
+    NSUInteger dotPos = [textField.text rangeOfString:@"."].location;
 
     if (colonPos != NSNotFound && colonPos <= 10 && (dotPos == NSNotFound || colonPos < dotPos))
         urlString = textField.text;
