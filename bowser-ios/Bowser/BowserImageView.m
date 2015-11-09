@@ -1,8 +1,8 @@
 //
-//  BowserWebView.h
+//  BowserImageView.m
 //  Bowser
 //
-//  Copyright (c) 2014, Ericsson AB.
+//  Copyright (c) 2015, Ericsson AB.
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification,
@@ -27,28 +27,15 @@
 //  OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
+#import "BowserImageView.h"
 
-@protocol BowserWebViewDelegate <NSObject>
+#import <QuartzCore/QuartzCore.h>
 
-@optional
-- (void)webviewProgress:(float)progress;
-- (void)newOwrMessage:(NSString*)message;
-- (void)newVideoRect:(CGRect)rect rotation:(int)degrees tag:(NSString *)tag;
-@end
+@implementation BowserImageView
 
-@interface BowserWebView : UIWebView
++ (Class) layerClass
 {
-    int resourceCount;
-    int resourceCompletedCount;
+    return [CAEAGLLayer class];
 }
-
-@property (assign) id<BowserWebViewDelegate> bowserDelegate;
-@property (nonatomic) BOOL webGLEnabled;
-
-- (BOOL)isOnPageWithURL:(NSString *)urlString;
-- (void)shrink;
-- (void)restore;
-- (NSString *)getCurrentHost;
 
 @end
