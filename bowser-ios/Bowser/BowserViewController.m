@@ -375,23 +375,12 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
         [videoView removeFromSuperview];
     }];
     [self.renderers removeAllObjects];
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.urlField.text = webView.URL.absoluteString;
 
     NSLog(@"webViewDidStartLoading... %@", webView.URL.absoluteString);
     self.progressBar.hidden = NO;
-
-    [self newVideoRect:CGRectZero forSelfView:YES];
-    [self newVideoRect:CGRectZero forSelfView:NO];
-    if (pageNavigationTimer.isValid)
-        [pageNavigationTimer invalidate];
-
-    NSLog(@"creating timer");
-    pageNavigationTimer = [NSTimer scheduledTimerWithTimeInterval:0
-                                                           target:self
-                                                         selector:@selector(insertJavascript:)
-                                                         userInfo:nil
-                                                          repeats:YES];
 }
 
 /*
@@ -408,15 +397,10 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
 - (void)newVideoRect:(CGRect)rect rotation:(int)degrees tag:(NSString *)tag
 {
-    if (rectIsSelfView) {
-        self.selfView.frame = rect;
-    } else {
-        self.remoteView.frame = rect;
-
-    BowserImageView *videoView = [self.renderers valueForKey:tag];
+    OpenWebRTCVideoView *videoView = [self.renderers valueForKey:tag];
 
     if (!videoView) {
-        videoView = [[BowserImageView alloc] initWithFrame:rect];
+        videoView = [[OpenWebRTCVideoView alloc] initWithFrame:rect];
         [self.renderers setObject:videoView forKey:tag];
         [self.browserView.scrollView addSubview:videoView];
         owr_window_registry_register(owr_window_registry_get(), [tag UTF8String], (__bridge gpointer)videoView);

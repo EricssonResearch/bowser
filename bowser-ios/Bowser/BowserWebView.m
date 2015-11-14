@@ -57,10 +57,7 @@
         CGFloat height = ([[messageComps objectAtIndex:6] floatValue] - y);
         int rotation = [[messageComps objectAtIndex:7] intValue];
         CGRect newRect = CGRectMake(x * sf, y * sf, width * sf, height * sf);
-        /*
-        [self.owrDelegate newVideoRect:newRect forSelfView:[[messageComps objectAtIndex:1] boolValue]];
-         */
-        [self.bowserDelegate newVideoRect:newRect rotation:rotation tag:tag];
+        [self.owrDelegate newVideoRect:newRect rotation:rotation tag:tag];
     } else {
         //[super webView:sender runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame];
         NSLog(@"WARNING! owr-message:video-rect NOT handled");
