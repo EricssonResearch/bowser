@@ -64,18 +64,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     
     NSLog(@"BowserViewController viewDidLoad");
 
-    self.javascriptCode = @
-        "(function () {"
-        "    if (window.RTCPeerConnection)"
-        "        return \"\";"
-        "    var xhr = new XMLHttpRequest();"
-        "    xhr.open(\"GET\", \"" kBridgeLocalURL "\", false);"
-        "    xhr.send();"
-        "    window.navigator.__owrVideoOverlaySupport = true;"
-        "    eval(xhr.responseText);"
-        "    return \"ok\";"
-        "})()";
-
     self.browserView.scrollView.delegate = self;
     self.browserView.owrDelegate = self;
     self.consoleLogView.scrollView.scrollsToTop = NO;
