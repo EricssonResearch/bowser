@@ -23,6 +23,7 @@
 		F81B2E001A0BC7580053E19A /* Bookmarks.plist in Resources */ = {isa = PBXBuildFile; fileRef = F81B2DFF1A0BC7580053E19A /* Bookmarks.plist */; };
 		F81B2E031A0BD8390053E19A /* BookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F81B2E021A0BD8390053E19A /* BookmarksViewController.m */; };
 		F81B2E071A0BFB8A0053E19A /* AddBookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F81B2E061A0BFB8A0053E19A /* AddBookmarkViewController.m */; };
+		F82F68581BFC62510026A7DE /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F82F68571BFC62510026A7DE /* libiconv.tbd */; };
 		F84D76DD19A368C20039552D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84D76DC19A368C20039552D /* Images.xcassets */; };
 		F89E07B615F8CB5B00262F59 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A82AEC15F8C00E003460E5 /* AboutViewController.m */; };
 		F8AE2FC219D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */; };
@@ -62,6 +63,7 @@
 		F81B2E021A0BD8390053E19A /* BookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksViewController.m; sourceTree = "<group>"; };
 		F81B2E051A0BFB8A0053E19A /* AddBookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBookmarkViewController.h; sourceTree = "<group>"; };
 		F81B2E061A0BFB8A0053E19A /* AddBookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBookmarkViewController.m; sourceTree = "<group>"; };
+		F82F68571BFC62510026A7DE /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		F84D76DC19A368C20039552D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		F8A82AEB15F8C00E003460E5 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ../AboutViewController.h; sourceTree = "<group>"; };
 		F8A82AEC15F8C00E003460E5 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = ../AboutViewController.m; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82F68581BFC62510026A7DE /* libiconv.tbd in Frameworks */,
 				F8E9CB4D1BD4C1C1006ED336 /* libc++.tbd in Frameworks */,
 				F8E9CB4B1BD4C1B5006ED336 /* libresolv.tbd in Frameworks */,
 				4CE203E180B450A9FB63C713 /* libPods-Bowser.a in Frameworks */,
@@ -117,6 +120,7 @@
 		B7E3D0D415625681003DE0F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F82F68571BFC62510026A7DE /* libiconv.tbd */,
 				F8E9CB571BD61222006ED336 /* WebKit.framework */,
 				F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */,
 				F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */,
