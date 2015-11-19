@@ -47,17 +47,17 @@
 
 - (void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(id)frame
 {
-    NSLog(@"now we can handle the alert message: %@", message);
     if ([message rangeOfString:@"owr-message:video-rect"].location == 0) {
-        NSLog(@"got new info about video elems");
         CGFloat sf = 1.0/([UIScreen mainScreen].scale);
         NSArray *messageComps = [message componentsSeparatedByString:@","];
-        CGFloat x = [[messageComps objectAtIndex:2] floatValue];
-        CGFloat y = [[messageComps objectAtIndex:3] floatValue];
-        CGFloat width = [[messageComps objectAtIndex:4] floatValue] - x;
-        CGFloat height = [[messageComps objectAtIndex:5] floatValue] - y;
+        NSString *tag = [messageComps objectAtIndex:2];
+        CGFloat x = [[messageComps objectAtIndex:3] floatValue];
+        CGFloat y = [[messageComps objectAtIndex:4] floatValue];
+        CGFloat width = [[messageComps objectAtIndex:5] floatValue] - x;
+        CGFloat height = ([[messageComps objectAtIndex:6] floatValue] - y);
+        int rotation = [[messageComps objectAtIndex:7] intValue];
         CGRect newRect = CGRectMake(x * sf, y * sf, width * sf, height * sf);
-        [self.owrDelegate newVideoRect:newRect forSelfView:[[messageComps objectAtIndex:1] boolValue]];
+        [self.owrDelegate newVideoRect:newRect rotation:rotation tag:tag];
     } else {
         //[super webView:sender runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame];
         NSLog(@"WARNING! owr-message:video-rect NOT handled");

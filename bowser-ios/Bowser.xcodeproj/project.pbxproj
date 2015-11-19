@@ -26,6 +26,7 @@
 		F84D76DD19A368C20039552D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84D76DC19A368C20039552D /* Images.xcassets */; };
 		F89E07B615F8CB5B00262F59 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A82AEC15F8C00E003460E5 /* AboutViewController.m */; };
 		F8AE2FC219D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */; };
+		F8C9D3681BF5D0B2003ABB0C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D3671BF5D0B2003ABB0C /* libiconv.tbd */; };
 		F8E9CB4B1BD4C1B5006ED336 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */; };
 		F8E9CB4D1BD4C1C1006ED336 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */; };
 		F8F3813019D00A6300A1B471 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8F3812F19D00A6300A1B471 /* Launch Screen.xib */; };
@@ -66,6 +67,7 @@
 		F8A82AEB15F8C00E003460E5 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ../AboutViewController.h; sourceTree = "<group>"; };
 		F8A82AEC15F8C00E003460E5 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = ../AboutViewController.m; sourceTree = "<group>"; };
 		F8AE2FC119D0A3F40083C6BF /* OpenWebRTC-Logo-w400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OpenWebRTC-Logo-w400.png"; path = "../OpenWebRTC-Logo-w400.png"; sourceTree = "<group>"; };
+		F8C9D3671BF5D0B2003ABB0C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F8E9CB571BD61222006ED336 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C9D3681BF5D0B2003ABB0C /* libiconv.tbd in Frameworks */,
 				F8E9CB4D1BD4C1C1006ED336 /* libc++.tbd in Frameworks */,
 				F8E9CB4B1BD4C1B5006ED336 /* libresolv.tbd in Frameworks */,
 				4CE203E180B450A9FB63C713 /* libPods-Bowser.a in Frameworks */,
@@ -117,6 +120,7 @@
 		B7E3D0D415625681003DE0F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8C9D3671BF5D0B2003ABB0C /* libiconv.tbd */,
 				F8E9CB571BD61222006ED336 /* WebKit.framework */,
 				F8E9CB4C1BD4C1C1006ED336 /* libc++.tbd */,
 				F8E9CB4A1BD4C1B5006ED336 /* libresolv.tbd */,
