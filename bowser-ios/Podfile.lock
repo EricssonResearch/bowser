@@ -1,5 +1,5 @@
 PODS:
-  - OpenWebRTC (0.3.90)
+  - OpenWebRTC (0.3.91)
   - OpenWebRTC-SDK (0.3.2):
     - OpenWebRTC
 
@@ -13,11 +13,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   OpenWebRTC-SDK:
-    :commit: 1226132e6b9fd5216f95e68541720ef9f073b601
+    :commit: d00dd8657df6dcb0212f1ff3f76cd8e6c780949c
     :git: https://github.com/EricssonResearch/openwebrtc-ios-sdk.git
 
 SPEC CHECKSUMS:
-  OpenWebRTC: e95be6c53da5d3cd53375de672af9975bcdd108d
+  OpenWebRTC: 982e4e05d8ba92011526cf890b04ca2bb45f2ad6
   OpenWebRTC-SDK: baeb7e6b4247b9a74e61be1aa43d75feee236019
 
 COCOAPODS: 0.38.2
