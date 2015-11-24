@@ -356,11 +356,12 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 }
 
 #pragma mark webview delegate stuff
+
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
-    [self.renderers enumerateKeysAndObjectsUsingBlock:^(NSString *tag, BowserImageView *videoView, BOOL *stop) {
+    [self.renderers enumerateKeysAndObjectsUsingBlock:^(NSString *tag, OpenWebRTCWebView *videoView, BOOL *stop) {
         owr_window_registry_unregister(owr_window_registry_get(), [tag UTF8String]);
-        [videoView removeFromSuperview];
+        [videoView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
     }];
     [self.renderers removeAllObjects];
 
