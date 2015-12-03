@@ -30,7 +30,6 @@
 #import "BowserViewController.h"
 #import "BowserHistoryTableViewCell.h"
 #import "BowserAppDelegate.h"
-#import "BowserImageView.h"
 #include <owr_bridge.h>
 #include <owr_window_registry.h>
 
