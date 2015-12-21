@@ -1,6 +1,6 @@
 platform :ios, '7.1'
 
 target 'Bowser' do
-    pod 'OpenWebRTC-SDK',  :git => 'https://github.com/EricssonResearch/openwebrtc-ios-sdk.git'
-    #pod 'OpenWebRTC-SDK', :path => '../../openwebrtc-ios-sdk/OpenWebRTC-SDK.podspec'
+    #pod 'OpenWebRTC-SDK',  :git => 'https://github.com/EricssonResearch/openwebrtc-ios-sdk.git'
+    pod 'OpenWebRTC-SDK', :path => '../../openwebrtc-ios-sdk/OpenWebRTC-SDK.podspec'
 end

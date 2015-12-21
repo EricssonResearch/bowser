@@ -101,11 +101,6 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     // Make native video elements
     self.selfView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
     self.remoteView = [[OpenWebRTCVideoView alloc] initWithFrame:CGRectZero];
-
-    // TODO conflict: Maybe not add them here?
-    //[self.browserView.scrollView addSubview:self.remoteView];
-    //[self.browserView.scrollView addSubview:self.selfView];
-
     self.renderers = [NSMutableDictionary dictionary];
 
     [self.headerView addSubview:self.bookmarkButton];
@@ -113,6 +108,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
     // Observe loading progress.
     [self.browserView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+
+    [self setOverlayVideoRenderingEnabled:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -153,6 +150,11 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
     isInitialLoad = NO;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)presentInitializingMessage
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Initializing"
@@ -186,44 +188,74 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
 - (IBAction)toggleBookmarks
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Bowser Options"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Close"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:
-                                  @"Clear History",
-                                  consoleIsVisible? @"Hide Console": @"Show Console",
-                                  @"About Bowser",
-                                  @"Bookmarks",
-                                  @"Add bookmark", nil];
-    [actionSheet showInView:self.view];
-}
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Options"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == BowserMenuOptionClearHistory) {
-        [bowserHistory removeAllObjects];
-        [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    } else if (buttonIndex == BowserMenuOptionShowConsole) {
-        if (consoleIsVisible) {
-            [self slideDownView:self.consoleLogView];
-        } else {
-            [self slideUpView:self.consoleLogView];
-        }
-        consoleIsVisible = !consoleIsVisible;
-    } else if (buttonIndex == BowserMenuOptionAboutPage) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSegueWithIdentifier:@"aboutPageSegue" sender:self];
-        });
-    } else if (buttonIndex == BowserMenuOptionShowBookmarks) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSegueWithIdentifier:@"bookmarksSegue" sender:self];
-        });
-    } else if (buttonIndex == BowserMenuOptionAddBookmark) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSegueWithIdentifier:@"addBookmarkSegue" sender:self];
-        });
-    }
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Clear History"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *_action) {
+                                                       [self clearHistory:nil];
+                                                   }];
+    [alert addAction:action];
+
+    /*
+    action = [UIAlertAction actionWithTitle:consoleIsVisible ? @"Hide Console": @"Show Console"
+                                      style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction *_action) {
+                                        if (consoleIsVisible) {
+                                            [self slideDownView:self.consoleLogView];
+                                        } else {
+                                            [self slideUpView:self.consoleLogView];
+                                        }
+                                        consoleIsVisible = !consoleIsVisible;
+                                    }];
+    [alert addAction:action];
+     */
+
+    NSString *title = [self isOverlayVideoRenderingEnabled] ? @"Disable overlay rendering": @"Enable overlay rendering";
+    action = [UIAlertAction actionWithTitle:title
+                                      style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction *_action) {
+                                        BOOL isEnabled = [self isOverlayVideoRenderingEnabled];
+                                        [self setOverlayVideoRenderingEnabled:!isEnabled];
+                                        [self.browserView reload];
+                                    }];
+    [alert addAction:action];
+
+    action = [UIAlertAction actionWithTitle:@"About Bowser"
+                                      style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction *_action) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [self performSegueWithIdentifier:@"aboutPageSegue" sender:self];
+                                        });
+                                    }];
+    [alert addAction:action];
+
+    action = [UIAlertAction actionWithTitle:@"Bookmarks"
+                                      style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction *_action) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [self performSegueWithIdentifier:@"bookmarksSegue" sender:self];
+                                        });
+                                    }];
+    [alert addAction:action];
+
+    action = [UIAlertAction actionWithTitle:@"Add bookmark"
+                                      style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction *_action) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [self performSegueWithIdentifier:@"addBookmarkSegue" sender:self];
+                                        });
+                                    }];
+    [alert addAction:action];
+
+    action = [UIAlertAction actionWithTitle:@"Cancel"
+                                      style:UIAlertActionStyleCancel
+                                    handler:nil];
+    [alert addAction:action];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark textfield delegate methods
@@ -453,11 +485,16 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
         NSLog(@"Error: %@", error.localizedDescription);
         return;
     }
-    [[[UIAlertView alloc] initWithTitle:@"Bowser has a problem"
-                                message:error.localizedDescription
-                               delegate:nil
-                      cancelButtonTitle:@"Close"
-                      otherButtonTitles: nil] show];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Bowser has a problem"
+                                                                   message:error.localizedDescription
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    [alert addAction:action];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)consoleLog:(NSString *)logString isError:(BOOL)isError
@@ -514,12 +551,24 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
 - (IBAction)clearHistory:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Clear Bowser Data?"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:@"Clear Data"
-                                                    otherButtonTitles:nil];
-    [actionSheet showInView:self.view];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Clear Bowser Data?"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    [alert addAction:action];
+
+    action = [UIAlertAction actionWithTitle:@"Clear data"
+                                      style:UIAlertActionStyleDestructive
+                                    handler:^(UIAlertAction *_action) {
+                                        [bowserHistory removeAllObjects];
+                                        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                                    }];
+    [alert addAction:action];
+
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark table view stuff

@@ -41,8 +41,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    
     // Change UserAgent to include Bowser as well as "not Chrome"
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:kUserAgent, version, nil]

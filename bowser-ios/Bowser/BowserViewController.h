@@ -42,7 +42,7 @@ typedef enum {
     BowserMenuOptionAddBookmark,
 } BowserMenuOption;
 
-@interface BowserViewController : OpenWebRTCViewController <UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, BookmarkSelectionDelegate, UIAlertViewDelegate>
+@interface BowserViewController : OpenWebRTCViewController <UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, BookmarkSelectionDelegate>
 {
     bool canChange;
     bool headerIsAbove;
