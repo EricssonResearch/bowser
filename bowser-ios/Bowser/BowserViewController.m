@@ -113,6 +113,8 @@ static NSString *errorDividerHtml = @"</div><div class='__error'>";
 
     // Observe loading progress.
     [self.browserView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+
+    [self setOverlayVideoRenderingEnabled:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
