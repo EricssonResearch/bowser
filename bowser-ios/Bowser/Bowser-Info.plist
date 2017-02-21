@@ -78,5 +78,10 @@
 	<false/>
 	<key>User</key>
 	<string>${USER}</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 </dict>
 </plist>
